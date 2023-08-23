@@ -1,0 +1,11 @@
+# List of reviewers to approve changes in this repository
+
+* @Chaitanya-Siram
+
+# What if reviewer like to approve only json file
+
+*.js @Chaitanya-Siram
+
+# What if target is specific folder
+
+/docs/* @Chaitanya-Siram
