@@ -1,0 +1,12 @@
+# List of reviewers to approve changes in this repository
+* @Chaitanya-Siram
+
+# What if reviewer like to approve only json file
+
+*.js @Chaitanya-Siram
+
+# Reviewrs by email for html files
+*.html test@gmail.com
+# What if target is specific folder
+
+/docs/* @Chaitanya-Siram
