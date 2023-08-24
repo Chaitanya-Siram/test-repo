@@ -2,7 +2,7 @@
 * @Chaitanya-Siram @DomanKumar09
 
 # Reviewer by email for html files
-*.html test@gmail.com
+* .html test@gmail.com
 
 # Reviewer by organization Team
-*.txt  @organizationName/TeamName
+* .txt  @organizationName/TeamName
