@@ -1,14 +1,12 @@
 name: 'Deploy to Lambda Function'
 
 on:
-  push:
   workflow_dispatch:
     inputs:
-      version:
-        description: 'Repo Tag Name (Ex.: yyyymmdd-hhmmss)'
-        type: string
+      parameter_name:
+        description: 'Description of the parameter'
         required: true
-
+        
 jobs:
   Deploy:
     runs-on: ubuntu-latest
