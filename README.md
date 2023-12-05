@@ -1,3 +1,1 @@
-# test-repo
-Hello chaitanya
-AlphametricX
+# AMX-aws-lambdafunction

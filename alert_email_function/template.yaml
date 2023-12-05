@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  alert_email_function
+
+  Sample SAM Template for alert_email_function
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    LoggingConfig:
+      LogFormat: JSON
+Resources:
+  AlertEmailFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: email/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+      - x86_64
+      Timeout: 60
+      MemorySize: 128
+      Events:
+        AlertEmailEvent:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 20 * * * *)
