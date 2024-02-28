@@ -1,0 +1,263 @@
+.about-head {
+  color: #fff;
+  font-family: Inter;
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.06rem;
+  width: 80%;
+  margin: auto;
+  max-width: 800px;
+  padding-top: 7rem;
+}
+
+.about-us-header {
+  position: relative;
+  height: 13.5rem;
+  width: 100%;
+  background: url(../../../assets/img/background-hero-new.png);
+  background-size: cover;
+}
+
+.content-wrapper {
+  width: 80%;
+  margin: auto;
+  max-width: 800px;
+  padding: 4rem 0px;
+}
+
+.content {
+  align-self: stretch;
+  color: #000;
+  font-family: Inter;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2rem;
+  margin: 0;
+  letter-spacing: -0.01125rem;
+
+}
+
+.heading {
+  align-self: stretch;
+  color: #000;
+  font-family: Inter;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.9375rem;
+  letter-spacing: -0.045rem;
+}
+
+.text {
+  align-self: stretch;
+  color: #2D2D2D;
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2rem;
+  letter-spacing: -0.01rem;
+
+}
+
+.sub-text {
+  color: #2D2D2D;
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2rem;
+  letter-spacing: -0.01rem;
+
+}
+
+.value-sub-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 6rem;
+}
+
+.sub-head {
+
+  color: #000;
+  font-family: Inter;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem;
+  letter-spacing: -0.01125rem;
+}
+
+.sub-text {
+  color: #2D2D2D;
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2rem;
+  letter-spacing: -0.01rem;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2rem 0 ;
+  text-align: center;
+}
+.delivery-wrapper {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0rem;
+}
+
+.stand-text {
+  color: #2D2D2D;
+  text-align: center;
+  font-family: Inter;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: -0.01125rem;
+
+}
+
+
+@media screen and (max-width: 960px) {
+
+  .about-us-header{
+
+    height: 12.5rem;
+  }
+  .about-head {
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.06rem;
+    width: 85%;
+    margin: auto;
+    max-width: 800px;
+    padding-top: 7rem;
+  }
+
+  .content-wrapper {
+    width: 85%;
+    margin: auto;
+    max-width: 800px;
+    padding: 2rem 0px;
+  }
+
+  .value-sub-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 0rem;
+  }
+
+  .content {
+    align-self: stretch;
+    color: #000;
+    font-family: Inter;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem;
+    letter-spacing: -0.01125rem;
+    padding: 0rem 0rem 0rem 0rem;
+ 
+
+  }
+
+  .sub-text {
+    color: #2D2D2D;
+    font-family: Inter;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: -0.01rem;
+    padding: 0rem 0rem 0rem 0rem;
+  }
+
+  .sub-head {
+    color: #000;
+    font-family: Inter;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 0em;
+    letter-spacing: -0.01125rem;
+  }
+
+  .icon-container {
+    display: flex;
+    gap: 4rem;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
+  .delivery-wrapper {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+  }
+
+  .stand-text {
+    color: #2D2D2D;
+    text-align: center;
+    font-family: Inter;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 0rem;
+    letter-spacing: -0.01125rem;
+  }
+
+  .icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .text {
+    align-self: stretch;
+    color: #2D2D2D;
+    font-family: Inter;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: -0.01rem;
+    padding: 0rem 0rem 0rem 0rem;
+    
+  }
+  .AMX-secondary-btn {
+    display: flex;
+    margin-bottom: 1rem !important;
+    height: 3rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 8px;
+    background: #ffffff;
+    outline: none;
+    border: 1px solid #DFDFDF;
+    color: #5F39F8;
+    text-align: center;
+    font-family: Inter;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.14px;
+    padding: 0px 32px;
+    cursor: pointer;
+}
+}
