@@ -1,0 +1,36 @@
+FROM node:18 AS build
+
+WORKDIR /app
+
+ARG REACT_APP_API
+ARG REACT_APP_BACKEND_DUMMY
+ARG REACT_APP_TITLE
+ARG REACT_APP_CSV_FILE
+ARG REACT_APP_WEBSOCKET_API
+
+ENV REACT_APP_API=$REACT_APP_API
+ENV REACT_APP_BACKEND_DUMMY=$REACT_APP_BACKEND_DUMMY
+ENV REACT_APP_TITLE=$REACT_APP_TITLE
+ENV REACT_APP_CSV_FILE=$REACT_APP_CSV_FILE
+ENV REACT_APP_WEBSOCKET_API=$REACT_APP_WEBSOCKET_API
+
+
+COPY package*.json ./
+
+RUN npm cache clean --force
+
+RUN yarn install
+
+COPY . .
+
+RUN yarn build
+
+FROM nginx:alpine
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

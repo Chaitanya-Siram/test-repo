@@ -1,5 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import loginslice from './slices/loginSlice';
+import userSlice from './slices/userSlice';
+import dashbaordSlice from './slices/dashboardSlice';
+import themeSlice from './slices/themeSlice';
+import searchSlice from './slices/searchSlice';
+import searchInputSlice from './slices/searchInputSlice';
+import peopleDashboard from './slices/peopleDashboard';
+
+// const storedUserData = localStorage.getItem('data');
 const storedToken = localStorage.getItem('token');
 
 const initialUserState = {
@@ -9,11 +16,15 @@ const initialUserState = {
 
 const store = configureStore({
   reducer: {
-    // login: loginslice,
-    login: '',
+    user: userSlice,
+    dashboard: dashbaordSlice,
+    theme: themeSlice,
+    search: searchSlice,
+    searchInput: searchInputSlice,
+    peopleArray: peopleDashboard,
   },
   preloadedState: {
-    loing: initialUserState,
+    user: initialUserState,
   },
 });
 

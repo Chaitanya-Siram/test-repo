@@ -1,0 +1,29 @@
+/* Define your custom colors for the tokens */
+.custom-operator {
+  color: var(--operator-color) !important; /* Your custom color for operators */
+}
+
+.custom-string {
+  color: var(
+    --double-quotes-color
+  ) !important; /* Your custom color for strings */
+}
+
+.text-area-class {
+  border: 1px solid var(--grey-color) !important;
+}
+
+.text-area-class:focus {
+  border: 1px solid var(--grey-color) !important;
+  outline: none;
+}
+
+.search-result-text-area {
+  border: none;
+  outline: none;
+}
+
+.search-result-text-area:focus {
+  border: none;
+  outline: none;
+}

@@ -1,0 +1,33 @@
+.rdrStartEdge {
+  background-color: #675ef2;
+}
+.rdrEndEdge {
+  background-color: #675ef2;
+}
+.rdrInRange {
+  background-color: #675ef2;
+}
+
+.rdrDateDisplayItemActive {
+  box-shadow: 0 1px 2px 0 rgba(103, 94, 242, 0.21);
+}
+.rdrCalendarWrapper {
+  font-size: 0.75rem;
+  border: 1px solid #dedede;
+}
+.rdrDateDisplayItem input {
+  height: 2.5rem;
+  line-height: 2.5rem;
+  font-size: 0.8rem;
+}
+.rdrDayToday .rdrDayNumber span:after {
+  background-color: #675ef2;
+}
+.rdrDateDisplay {
+  color: #675ef2 !important;
+}
+.rdrMonthPicker option,
+.rdrYearPicker option {
+  background-color: #fff;
+  padding: 0.5rem;
+}

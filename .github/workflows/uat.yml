@@ -1,0 +1,76 @@
+name: Deployment to UAT
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.run_number }}
+        run: |
+          docker build --build-arg REACT_APP_API=${{ secrets.REACT_APP_API_UAT }} --build-arg REACT_APP_BACKEND_DUMMY=${{ secrets.REACT_APP_BACKEND_DUMMY }} --build-arg REACT_APP_TITLE="AlphametricX UAT" --build-arg REACT_APP_CSV_FILE="https://amxasset-dev.s3.us-west-1.amazonaws.com/frontend/sample_CSV.csv" --build-arg REACT_APP_WEBSOCKET_API="wss://liveapi-uat.devamx.com/ws"  -t 958065208983.dkr.ecr.us-west-1.amazonaws.com/amx-frontend:${{ github.run_number }}  -t 958065208983.dkr.ecr.us-west-1.amazonaws.com/amx-frontend:${{ github.run_number }} .
+
+          docker push 958065208983.dkr.ecr.us-west-1.amazonaws.com/amx-frontend:${{ github.run_number }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Replace placeholders in deployment YAML
+        uses: richardrigutins/replace-in-files@v1
+        with:
+          files: "./build/deployment.yml"
+          search-text: '_BUILD__ID_'
+          replacement-text: '${{ github.run_number }}'
+
+      - name: Deploy to AWS EKS
+        uses: safe2008/eks-actions@v0.0.4
+        env:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          cluster_name: AMX-EKS
+        with:
+          args: |
+            kubectl apply -f ./build/deployment.yml -n amx-uat
+
+  notify:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Send notification to Microsoft Teams
+        uses: dchourasia/ms-teams-notification@1.1
+        with:
+          github-token: ${{ github.token }}
+          webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          card-layout-exit: compact
+          enable-view-status: true
+          environment: uat
