@@ -48,7 +48,7 @@ jobs:
         run: yarn --prefer-offline
 
       - name: Build
-        run: <your yarn command to build your site>
+        run: yarn build
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
