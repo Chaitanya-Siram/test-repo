@@ -15,7 +15,7 @@ jobs:
     timeout-minutes: 10
     
     env:
-      NODE_VERSION: '14'
+      NODE_VERSION: '18.19.0'
       S3_BUCKET: 'arn:aws:s3:::autofrontend'
       CDN_DISTRIBUTION_ID: 'E1XTDUFAVU50UR'
       AWS_REGION: 'us-west-1'
