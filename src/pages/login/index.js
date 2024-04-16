@@ -202,7 +202,7 @@ const LoginPage = () => {
               }}
             >
               <LoginFormBox>
-                <FormGraytxt>Login to Alphametricx</FormGraytxt>
+                <FormGraytxt>Login to Alphametric</FormGraytxt>
                 <LoginForm onSubmit={submitLoginDetails}>
                   <InputBox
                     label="Registered Email"
