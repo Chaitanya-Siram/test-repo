@@ -15,12 +15,15 @@ jobs:
     timeout-minutes: 10
     
     env:
-      NODE_VERSION: '18.19.0'
-      S3_BUCKET: 'buildbucket-fe'
-      CDN_DISTRIBUTION_ID: 'E2H3F6I09ZNUY4'
-      AWS_REGION: 'us-west-1'
+      NODE_VERSION: ${{ secrets.NODE_VERSION }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      CDN_DISTRIBUTION_ID: ${{ secrets.CDN_DISTRIBUTION_ID }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
       REACT_APP_API: ${{ secrets.REACT_APP_API }}
       REACT_APP_BACKEND_DUMMY: ${{ secrets.REACT_APP_BACKEND_DUMMY }}
+      REACT_APP_TITLE: ${{ secrets.REACT_APP_TITLE }}
+      REACT_APP_CSV_FILE: ${{ secrets.REACT_APP_CSV_FILE }}
+      REACT_APP_WEBSOCKET_API: ${{ secrets.REACT_APP_WEBSOCKET_API }}
 
     steps:
       - name: Checkout the code
