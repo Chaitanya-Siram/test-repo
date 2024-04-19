@@ -19,6 +19,7 @@ jobs:
       S3_BUCKET: 'buildbucket-fe'
       CDN_DISTRIBUTION_ID: 'E2H3F6I09ZNUY4'
       AWS_REGION: 'us-west-1'
+      REACT_APP_API: ${{ secrets.REACT_APP_API }}
 
     steps:
       - name: Checkout the code
