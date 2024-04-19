@@ -20,6 +20,7 @@ jobs:
       CDN_DISTRIBUTION_ID: 'E2H3F6I09ZNUY4'
       AWS_REGION: 'us-west-1'
       REACT_APP_API: ${{ secrets.REACT_APP_API }}
+      REACT_APP_BACKEND_DUMMY: ${{ secrets.REACT_APP_BACKEND_DUMMY }}
 
     steps:
       - name: Checkout the code
