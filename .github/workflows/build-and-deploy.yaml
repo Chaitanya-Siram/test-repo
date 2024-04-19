@@ -16,8 +16,8 @@ jobs:
     
     env:
       NODE_VERSION: '18.19.0'
-      S3_BUCKET: 'autofrontend'
-      CDN_DISTRIBUTION_ID: 'E1XTDUFAVU50UR'
+      S3_BUCKET: 'buildbucket-fe'
+      CDN_DISTRIBUTION_ID: 'E2H3F6I09ZNUY4'
       AWS_REGION: 'us-west-1'
 
     steps:
