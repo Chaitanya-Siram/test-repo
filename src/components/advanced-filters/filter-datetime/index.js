@@ -17,6 +17,8 @@ import { useSelector } from 'react-redux';
 import { theme } from '../../../constants/theme';
 import ArrowIcon from '../../../assets/icons/Arrow';
 import { DateRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 import { addDays } from 'date-fns';
 import '../../Calendar/Calendar.css';
 import { formatDate } from '../../../utils';

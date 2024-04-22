@@ -14,7 +14,7 @@ const Custom = ({
   selectedItems,
   selectedChartsCountConfig,
   handleUpdates,
-  setStoringKeywords = () => { },
+  setStoringKeywords = () => {},
 }) => {
   const [keywordData, setKeywordData] = useState({
     brandData: [],
@@ -117,25 +117,25 @@ const Custom = ({
           {Object.keys(selectedChartsCountConfig)
             .filter((key) => key !== 'industry')
             .some((key) => selectedChartsCountConfig[key] > 0) && (
-              <Button
-                title="Analyze"
-                coachMarkId='brand-competition-people-custom-analyze-wrp'
-                backgroundColor={theme[selectedTheme].primary}
-                color={theme[selectedTheme].logoText}
-                onClick={handleAnalyze}
-                btnStyle={btnStyle}
-                disable={
-                  (selectedChartsCountConfig.people > 0 &&
-                    keywordData?.peopleData?.length === 0) ||
-                  (selectedChartsCountConfig.brandComp > 0 &&
-                    (keywordData.competitionData.length === 0 ||
-                      keywordData.brandData.length === 0)) ||
-                  (selectedChartsCountConfig.brandNotcomp > 0 &&
-                    keywordData.brandData.length === 0)
-                }
-                disableStyle={disabledStyle}
-              />
-            )}
+            <Button
+              title="Analyze"
+              coachMarkId="brand-competition-people-custom-analyze-wrp"
+              backgroundColor={theme[selectedTheme].primary}
+              color={theme[selectedTheme].logoText}
+              onClick={handleAnalyze}
+              btnStyle={btnStyle}
+              disable={
+                (selectedChartsCountConfig.people > 0 &&
+                  keywordData?.peopleData?.length === 0) ||
+                (selectedChartsCountConfig.brandComp > 0 &&
+                  (keywordData.competitionData.length === 0 ||
+                    keywordData.brandData.length === 0)) ||
+                (selectedChartsCountConfig.brandNotcomp > 0 &&
+                  keywordData.brandData.length === 0)
+              }
+              disableStyle={disabledStyle}
+            />
+          )}
         </Styles.ButtonWrapper>
       </Styles.InputRow>
     </Styles.Wrapper>

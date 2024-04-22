@@ -354,50 +354,6 @@ const SlotDetails = ({
       ref={containerRef}
       className={widgetClassName}
     >
-      <IconBox type={type} isSavePopup={isSavePopup}>
-        {/* <Iconwpr width={'1.5rem'} height={'1.5rem'} onClick={handleClick}>
-          <ExpandIcon />
-        </Iconwpr> */}
-        {/* {overRideSlot && (
-          <Iconwpr onClick={handleShowDownloadPopUp}>
-            <ComponentIcon color="gray" />
-          </Iconwpr>
-        )} */}
-        {editOption && (
-          <Iconwpr
-            width={'1.5rem'}
-            height={'1.5rem'}
-            onClick={handleGraphEditClick}
-            className="hide-downloading"
-          >
-            <Edit2 />
-          </Iconwpr>
-        )}
-        {actionOption && (
-          <>
-            <Iconwpr
-              width={'1.5rem'}
-              height={'1.5rem'}
-              onClick={(e) => {
-                console.log('it is calling');
-                handleOptionIcon(e, graphData.component);
-              }}
-              ref={downloadRef}
-              className="hide-downloading"
-            >
-              <VerticleDots
-                color={openActionDropdown ? '#675ef2' : '#5C5E60'}
-              />
-              <SimpleReusableDropDown
-                isOpen={openActionDropdown}
-                options={actionDropDownOptions}
-                graphDownloading={graphDownloading}
-                setIsOpen={setOpenActionDropDown}
-              />
-            </Iconwpr>
-          </>
-        )}
-      </IconBox>
       {/* <button onClick={() => setResetSelection(true)}>reset</button> */}
 
       <SlotDetailsWrp className="sentiment-graph-download">
@@ -417,6 +373,51 @@ const SlotDetails = ({
             </SlotTitle>
             {/* <SlotSubTitle>{widget.subTitle}</SlotSubTitle> */}
           </SlotHeaderLeft>
+
+          <IconBox type={type} isSavePopup={isSavePopup}>
+            {/* <Iconwpr width={'1.5rem'} height={'1.5rem'} onClick={handleClick}>
+          <ExpandIcon />
+        </Iconwpr> */}
+            {/* {overRideSlot && (
+          <Iconwpr onClick={handleShowDownloadPopUp}>
+            <ComponentIcon color="gray" />
+          </Iconwpr>
+        )} */}
+            {editOption && (
+              <Iconwpr
+                width={'1.5rem'}
+                height={'1.5rem'}
+                onClick={handleGraphEditClick}
+                className="hide-downloading"
+              >
+                <Edit2 />
+              </Iconwpr>
+            )}
+            {actionOption && (
+              <>
+                <Iconwpr
+                  width={'1.5rem'}
+                  height={'1.5rem'}
+                  onClick={(e) => {
+                    console.log('it is calling');
+                    handleOptionIcon(e, graphData.component);
+                  }}
+                  ref={downloadRef}
+                  className="hide-downloading"
+                >
+                  <VerticleDots
+                    color={openActionDropdown ? '#675ef2' : '#5C5E60'}
+                  />
+                  <SimpleReusableDropDown
+                    isOpen={openActionDropdown}
+                    options={actionDropDownOptions}
+                    graphDownloading={graphDownloading}
+                    setIsOpen={setOpenActionDropDown}
+                  />
+                </Iconwpr>
+              </>
+            )}
+          </IconBox>
 
           {/* {widget.enableTabs && (
             <SlotHeaderRight>

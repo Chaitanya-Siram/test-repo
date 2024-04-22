@@ -32,7 +32,7 @@ const People = (props) => {
     setPeopleData(tabKeywords);
   }, [tabKeywords]);
 
-  const handleAnalyze = () => { };
+  const handleAnalyze = () => {};
   const handleReceiveKeyword = (data) => {
     const finalData = [...peopleData, data];
     setPeopleData(finalData);
@@ -77,13 +77,14 @@ const People = (props) => {
                   </KeywordItem>
                 ))}
                 <AddKeyword
-                  coachMarkId='coach-people-keywords-wrp'
-                  handleSendKeyword={handleReceiveKeyword} />
+                  coachMarkId="coach-people-keywords-wrp"
+                  handleSendKeyword={handleReceiveKeyword}
+                />
               </AddItemContainer>
             </AddContentContainer>
           </AddContentWrp>
           <Button
-            coachMarkId='coach-people-analyze-wrp'
+            coachMarkId="coach-people-analyze-wrp"
             title="Analyze"
             backgroundColor={theme[selectedTheme].primary}
             color={theme[selectedTheme].logoText}

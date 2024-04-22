@@ -3,7 +3,7 @@
 // import { userName } from '../../redux/slices/userSlice';
 // import Carousel from '../../components/carousel';
 // import { Link } from '../../components/nav-section/index.sc';
-// import { Img } from '../../assets/img';
+// import { Image } from '../../assets/img/image.svg';
 // import PropTypes from 'prop-types';
 // import {
 //   BoldText,
@@ -21,7 +21,7 @@
 //       <ContentWrapper className="child">
 //         <TitleWrapper>{title} </TitleWrapper>
 //         <BoxWrapper>
-//           <ImgWrapper src={Img.Image} />{' '}
+//           <ImgWrapper src={Image} />{' '}
 //           <TextWrapper>
 //             <BoldText>{boldText}</BoldText>
 //             <LightText>{lightText}</LightText>

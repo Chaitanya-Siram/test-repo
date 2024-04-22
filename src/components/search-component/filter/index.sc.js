@@ -9,6 +9,9 @@ export const FiltersContainer = styled.div`
     padding-left: 0;
     padding-right: 0;
   } */
+  @media (max-width: 1250px) {
+    gap: 0rem;
+  }
 `;
 export const CircularLoadingWrapper = styled.div`
   height: 2.5rem;

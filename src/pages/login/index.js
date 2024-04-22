@@ -33,7 +33,9 @@ import {
   // CarouselWrpr,
   // CarouselScrollWrpr,
 } from './index.sc';
-import { Img } from '../../assets/img';
+import LoginBg2 from '../../assets/img/loginImg/LoginBg2.png';
+// import DarkLogo from '../../assets/img/bg/DarkLogo.svg';
+import NewAMXLogo from '../../assets/img/app/Alphametricx-logo-mark-dark.png';
 import { ValidateEmail } from './validateEmail';
 import { Button } from '../../components/button';
 import AppFooter from '../../components/app-footer';
@@ -177,7 +179,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <LoginContrwpr imageUrl={Img.LoginBg2}>
+      <LoginContrwpr imageUrl={LoginBg2}>
         <LoginTextDsly>
           Build
           <br />
@@ -189,7 +191,7 @@ const LoginPage = () => {
         <LoginFormCtrn>
           <LoginFormwpr>
             {/* <LogoBox> */}
-            <LogoImgwpr src={Img.DarkLogo} />
+            <LogoImgwpr src={NewAMXLogo} />
             {/* <LogoTextwpr>AlphametricX</LogoTextwpr> */}
             {/* </LogoBox> */}
             <div
@@ -243,9 +245,16 @@ const LoginPage = () => {
                     type="submit"
                   />
                   <LinkWrp>
-                    <LightGray to="/forgot-password">Forgot Password?</LightGray>
-                    <LightGray >|</LightGray>
-                    <LightGray to="https://www.alphametricx.com/request-demo" target="_blank">Request Demo</LightGray>
+                    <LightGray to="/forgot-password">
+                      Forgot Password?
+                    </LightGray>
+                    <LightGray>|</LightGray>
+                    <LightGray
+                      to="https://www.alphametricx.com/request-demo"
+                      target="_blank"
+                    >
+                      Request Demo
+                    </LightGray>
                   </LinkWrp>
                 </LoginForm>
               </LoginFormBox>

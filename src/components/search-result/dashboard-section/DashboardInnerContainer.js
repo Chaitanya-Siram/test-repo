@@ -16,7 +16,7 @@ import ResultOverTime from './result-over-time';
 import SlotPlaceHolder from '../slot-details/SlotPlaceHolder';
 import { axiosGet } from '../../../service';
 import { useLocation, useParams } from 'react-router-dom';
-import { baseURL } from '../../../constants';
+// import { baseURL } from '../../../constants';
 import { useQuery } from '@tanstack/react-query';
 import CircularLoading from '../../../assets/icons/loading/circularLoading';
 import { StatesWithMapData } from '../../../hooks/data/states';
@@ -31,7 +31,10 @@ import {
   standardDashboards,
   people,
 } from '../../../constants/widgets';
-import { Img } from '../../../assets/img';
+// import LogoWithText from '../../../assets/img/bg/logoWithText.svg';
+import AMXlogo from '../../../assets/img/app/Alphametricx-logo-mark-dark.png';
+// import { Img } from '../../../assets/img';
+import JournalistAndSourceGraph from '../../advanced-dashboard/author-impact';
 
 const noLegends = ['top_source', 'top_author', 'volume_analysis'];
 
@@ -178,7 +181,7 @@ const DashboardInnerContainer = ({
     Array.from(elementsToSetOpacity).forEach((element) => {
       element.style.opacity = '0';
     });
-    const logoUrl = Img.LogoWithText; // Update with the correct path to your logo
+    const logoUrl = AMXlogo; // Update with the correct path to your logo
 
     try {
       let dataUrl;
@@ -187,7 +190,7 @@ const DashboardInnerContainer = ({
         dataUrl = await toPng(containerElement, { pixelRatio: 4 });
       } else if (option.type === 'PDF') {
         // Use html-to-image to capture the container as an image
-        dataUrl = await toPng(containerElement);
+        dataUrl = await toPng(containerElement, { pixelRatio: 4 });
       } else {
         throw new Error('Invalid download type. Use "Image" or "PDF".');
       }
@@ -203,7 +206,7 @@ const DashboardInnerContainer = ({
       });
 
       // Reset the background color of the container
-      containerElement.style.backgroundColor = 'transparent';
+      containerElement.style.backgroundColor = 'white';
 
       if (option.type === 'Image') {
         const imageDataUrlWithLogo = await combineImagesWithLogo(
@@ -329,7 +332,7 @@ const DashboardInnerContainer = ({
       title = rawData?.label;
     }
     if (uniqueId === 'coverage_by_source') {
-      title = d?.parentData?.parentData?.label;
+      title = graphSelection || d?.parentData?.parentData?.label;
     }
 
     setArticleType((prev) => ({
@@ -480,6 +483,46 @@ const DashboardInnerContainer = ({
         </FullSlot>
       );
     } else {
+      if (
+        widget?.component === 'coverage_by_journalist' &&
+        widget?.title === 'Coverage by Journalist'
+      ) {
+        return (
+          <JournalistAndSourceGraph
+            widget={widgetData}
+            loader={isLoading}
+            dashboardType={dashboardType}
+            handleOnClick={(event, d) =>
+              handleOnClick(event, d, widget, idx, data?.customClassName)
+            }
+            downloadFunction={onDownload}
+            setSelectedComponent={setSelectedComponent}
+            graphDownloading={graphDownloading}
+            editChart={savedChartConfig}
+            widgetClassName={data?.customClassName}
+          />
+        );
+      }
+      if (
+        widget?.component === 'coverage_by_source' &&
+        widget?.title === 'Coverage by Sources'
+      ) {
+        return (
+          <JournalistAndSourceGraph
+            widget={widgetData}
+            loader={isLoading}
+            dashboardType={dashboardType}
+            handleOnClick={(event, d) =>
+              handleOnClick(event, d, widget, idx, data?.customClassName)
+            }
+            downloadFunction={onDownload}
+            setSelectedComponent={setSelectedComponent}
+            graphDownloading={graphDownloading}
+            editChart={savedChartConfig}
+            widgetClassName={data?.customClassName}
+          />
+        );
+      }
       return (
         <HalfSlot
           className="graph-widget"

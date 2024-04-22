@@ -15,7 +15,7 @@ import {
   // WriteIconwpr,
 } from '../index.sc';
 import X from '../../../assets/icons/X';
-import { Img } from '../../../assets/img';
+import NpCustomis from '../../../assets/img/np_customize.svg';
 import {
   // CanvasBoxwpr,
   // CanvasContainer,
@@ -170,7 +170,7 @@ const NewCanDrawer = ({
     <DrawerContentBox>
       <Headerwrap>
         <Headerleftwpr>
-          {showEditIcon && <Imgwpr src={Img.NpCustomis} alt="" />}
+          {showEditIcon && <Imgwpr src={NpCustomis} alt="" />}
           <Heaerlblwrp>{heading}</Heaerlblwrp>
         </Headerleftwpr>
         <Iconwpr onClick={handleToggle}>

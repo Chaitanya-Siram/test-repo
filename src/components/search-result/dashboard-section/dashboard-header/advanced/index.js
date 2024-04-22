@@ -26,7 +26,7 @@ const Advanced = ({
   tabKeywords: keywords = {},
   handleUpdates,
   handleSubmit,
-  setStoringKeywords = () => { },
+  setStoringKeywords = () => {},
 }) => {
   const { dashboardType } = useParams();
 
@@ -68,10 +68,10 @@ const Advanced = ({
           dashboardType === 'sentiments'
             ? 'Choose Sentiments'
             : dashboardType === 'primpact'
-              ? 'PR Campaign Names'
-              : dashboardType === 'congruence'
-                ? 'Brand Name'
-                : 'Campaign Name'
+            ? 'PR Campaign Names'
+            : dashboardType === 'congruence'
+            ? 'Brand Name'
+            : 'Campaign Name'
         }
         namePlaceHolder={
           dashboardType === 'congruence'
@@ -95,7 +95,7 @@ const Advanced = ({
         </GenerateButton> */}
         <Button
           title={'Generate'}
-          coachMarkId='coach-campaign-generate-btn-wrp'
+          coachMarkId="coach-campaign-generate-btn-wrp"
           backgroundColor={theme[selectedTheme].primary}
           color={theme[selectedTheme].logoText}
           onClick={() => handleSubmit({ campaignData })}

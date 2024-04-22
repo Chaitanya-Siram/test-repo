@@ -21,7 +21,7 @@ const Campaigns = ({
   namePlaceHolder,
   keywordsPlaceHolder,
   campaignData: campaigns = [],
-  handleCampaignData = () => { },
+  handleCampaignData = () => {},
 }) => {
   const { dashboardType } = useParams();
   const selectedTheme = useSelector((store) => {
@@ -108,7 +108,7 @@ const Campaigns = ({
             <AddCampaignWrapper
               isVisible={campaigns.length < 5}
               onClick={addNewCampaign}
-              id='coach-add-campaign-wrapper'
+              id="coach-add-campaign-wrapper"
             >
               <Plus
                 width="1.14rem"

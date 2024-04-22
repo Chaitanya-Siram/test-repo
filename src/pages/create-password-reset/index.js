@@ -16,7 +16,10 @@ import {
   ValidationWrp,
   ValidationsListWrp,
 } from './index.sc';
-import { Img } from '../../assets/img';
+// import DarkLogo from '../../assets/img/bg/DarkLogo.svg';
+import NewAMXLogo from '../../assets/img/app/Alphametricx-logo-mark-dark.png';
+import Cancel from '../../assets/img/cancel.png';
+import Check from '../../assets/img/check.png';
 import { TitleWrp } from '../../components/edit-graph-popup/index.sc';
 import { useNavigate, useSearchParams } from 'react-router-dom/dist';
 import VisiblityOff from '../../assets/icons/VisiblityOff';
@@ -166,7 +169,7 @@ const CreatePasswordReset = () => {
         <TotalWrp>
           <LeftContainer>Build Analytics with intelligence</LeftContainer>
           <RightContainer>
-            <AlphaIcon src={Img.DarkLogo} />
+            <AlphaIcon src={NewAMXLogo} />
             <TitleWrp>Create Password</TitleWrp>
             <TitleDescpSec>
               <b>
@@ -261,41 +264,41 @@ const CreatePasswordReset = () => {
               <ValidationTitle>Create a strong password</ValidationTitle>
               <ValidationsListWrp>
                 {isUpperCaseValid ? (
-                  <img src={Img.Check} alt="check" />
+                  <img src={Check} alt="check" />
                 ) : (
-                  <img src={Img.Cancel} alt="check" />
+                  <img src={Cancel} alt="check" />
                 )}
                 <ValidationText>Include UpperCase</ValidationText>
               </ValidationsListWrp>
               <ValidationsListWrp>
                 {isLowerCaseValid ? (
-                  <img src={Img.Check} alt="check" />
+                  <img src={Check} alt="check" />
                 ) : (
-                  <img src={Img.Cancel} alt="check" />
+                  <img src={Cancel} alt="check" />
                 )}
                 <ValidationText>Include Lowercase</ValidationText>
               </ValidationsListWrp>
               <ValidationsListWrp>
                 {isNumberValid ? (
-                  <img src={Img.Check} alt="check" />
+                  <img src={Check} alt="check" />
                 ) : (
-                  <img src={Img.Cancel} alt="check" />
+                  <img src={Cancel} alt="check" />
                 )}
                 <ValidationText>Include Number</ValidationText>
               </ValidationsListWrp>
               <ValidationsListWrp>
                 {isSpecialCharacterValid ? (
-                  <img src={Img.Check} alt="check" />
+                  <img src={Check} alt="check" />
                 ) : (
-                  <img src={Img.Cancel} alt="check" />
+                  <img src={Cancel} alt="check" />
                 )}
                 <ValidationText>Include Special Character</ValidationText>
               </ValidationsListWrp>
               <ValidationsListWrp>
                 {isLengthValid ? (
-                  <img src={Img.Check} alt="check" />
+                  <img src={Check} alt="check" />
                 ) : (
-                  <img src={Img.Cancel} alt="check" />
+                  <img src={Cancel} alt="check" />
                 )}
                 <ValidationText>Min 12 characters</ValidationText>
               </ValidationsListWrp>

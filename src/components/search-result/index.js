@@ -162,12 +162,18 @@ const SearchResult = () => {
   const [selectedPath, setSelectedPath] = useState('');
   const [selectedDashboardItems, setSelectedDashboardItems] = useState({});
   const [changeSaved, setChangeSaved] = useState(searchId !== 'custom-search');
+  const selectedSavedSearch = location?.state?.savedSearchData;
 
   const [isDocDownloading, setIsDocDownloading] = useState(false);
   const [sydicationArticles, setSydicationArticles] = useState([]);
   const [sydicationActive, setSydicationActive] = useState(false);
-  const [recentSearchArticlesId, setRecentSearchArticlesId] =
-    useState(savedSearchId);
+  const [recentSearchArticlesId, setRecentSearchArticlesId] = useState(
+    selectedSavedSearch?.recent_search_id
+      ? selectedSavedSearch?.recent_search_id
+      : isNaN(+savedSearchId)
+      ? 0
+      : parseInt(savedSearchId)
+  );
   const shouldSaveSearch = useRef(false);
   const [isCustomPagiNationFlag, setIsCustomPagiNationFlag] = useState(false);
 
@@ -263,8 +269,6 @@ const SearchResult = () => {
     setShowCustomComponent(!showCustomComponent);
     setDropdownOpen(!dropdownOpen);
   };
-
-  const selectedSavedSearch = location?.state?.savedSearchData;
 
   // Access the complete URL
   const fullURL = location.pathname + location.search;
@@ -418,10 +422,6 @@ const SearchResult = () => {
           total: 0,
         });
       } else {
-        selectedSavedSearch
-          ? setRecentSearchArticlesId(selectedSavedSearch?.recent_search_id)
-          : parseInt(searchData?.data?.recent_search_id) &&
-            setRecentSearchArticlesId(searchData?.data?.recent_search_id);
         setArticles(searchData?.data?.data);
         setHiddenArticlesLocal([]);
         setBookmarksLocal([]);
@@ -443,7 +443,7 @@ const SearchResult = () => {
   useEffect(() => {
     if (type === 'totalArticles' && searchData?.data?.paged) {
       setSearchTotalData(
-        [{ key: 'Online', doc_count: searchData?.data?.paged?.unique ?? 0 }] ||
+        [{ key: 'Online', doc_count: searchData?.data?.paged?.total ?? 0 }] ||
           []
       );
     }
@@ -457,10 +457,6 @@ const SearchResult = () => {
 
   React.useEffect(() => {
     if (isInSearchSuccess) {
-      selectedSavedSearch
-        ? setRecentSearchArticlesId(selectedSavedSearch?.recent_search_id)
-        : setRecentSearchArticlesId(searchData?.data?.recent_search_id);
-
       setInSearchArticles(inSearchData?.data?.data);
       setHiddenArticlesLocal([]);
       setBookmarksLocal([]);
@@ -1263,6 +1259,17 @@ const SearchResult = () => {
       const data = JSON.parse(JSON.parse(event?.data));
       if (data?.response_status === 'SEARCH_SUBMITTED') {
         if (data?.data?.searchId) {
+          if (!recentSearchIdRef?.current) {
+            setRecentSearchArticlesId(
+              selectedSavedSearch?.recent_search_id
+                ? selectedSavedSearch?.recent_search_id
+                : isNaN(+savedSearchId)
+                ? data?.data?.searchId
+                : parseInt(savedSearchId)
+            );
+          } else {
+            setRecentSearchArticlesId(data?.data?.searchId);
+          }
           recentSearchIdRef.current = data?.data?.searchId;
           setIsDataPreprocessed(false);
           setResetTimer((old) => !old);
@@ -2013,6 +2020,8 @@ const SearchResult = () => {
     }
     return graphData;
   };
+
+  console.log(articlePaging);
 
   return (
     <SearchPageWrp>

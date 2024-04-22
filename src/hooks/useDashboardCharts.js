@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { useQuery } from '@tanstack/react-query';
 import { get } from '../service';
 import { API } from '../constants';
@@ -22,9 +23,9 @@ import {
   calculatePercentage,
   calculatePercentageIncrease,
   removeQuotesFromObjectKeys,
-  toCamelCase,
+  // toCamelCase,
 } from '../constants/utils';
-import { format, parse, parseISO } from 'date-fns';
+// import { format, parse, parseISO } from 'date-fns';
 import { convertValuesToInt } from '../constants/dashboards/dashboardUtils';
 import { getFormattedDate } from './useCharts';
 import { encloseWordsInDoubleQuotes } from './usePeopleCharts';
@@ -638,36 +639,153 @@ export const getJournalistCoverageData = async (payload, brand, comp) => {
 
   const mapData = JSON.parse(JSON.stringify(journalistMapBreakdown));
 
-  // setting total count
-  const totalArticlesMapData = mapData.data.summary;
-  const totalCount = response?.total_count ? response?.total_count : 0;
-  totalArticlesMapData.value = String(addCountPrefix(totalCount));
-  mapData.data.summary = totalArticlesMapData;
+  const totalArticlesMapData = mapData.summary;
+  totalArticlesMapData.value = String(addCountPrefix(response?.total_count));
+  mapData.summary = totalArticlesMapData;
 
-  // setting data
-  mapData.data.data = response?.data
-    ? response?.data?.slice(0, 10)?.map((x) => {
-        const label = x.label;
-        const refinedXData = removeQuotesFromObjectKeys(x);
-        return {
-          ...refinedXData,
-          ...x,
-          label,
-        };
-      })
-    : [];
-  // setting labels for graph
-  mapData.data.labels = [
-    ...comp.map((k) => k.toLowerCase()),
-    ...brand.map((k) => k.toLowerCase()),
-  ]?.map((x) => {
-    return {
-      label: x,
-      value: String(x).toLowerCase(),
-    };
+  const result = {
+    no_articles: [],
+    prominence: [],
+    sentiment: [],
+    total_ave: [],
+    total_reach: [],
+    competition_Five: [],
+  };
+
+  Object.keys(response?.data).forEach((category, index) => {
+    // for (let i = 0; i === dataLenght; i++) {
+    if (category === JSON.stringify(brand.toString()).toLowerCase()) {
+      response?.data[category]?.slice(0, 10)?.map((item) => {
+        result.no_articles.push({
+          key: category,
+          author_id: item.author_id,
+          label: item.label,
+          value: item.count || 0,
+          color: '#DE1D83',
+          tooltipInfo: {},
+        });
+      });
+    } else if (category === JSON.stringify(keywords[0]).toLowerCase()) {
+      response?.data[category]?.slice(0, 10)?.map((item) => {
+        result.total_reach.push({
+          key: category,
+          author_id: item.author_id,
+          label: item.label,
+          value: item.count || 0,
+          color: '#8393C7',
+          tooltipInfo: {},
+        });
+      });
+    } else if (category === JSON.stringify(keywords[1]).toLowerCase()) {
+      response?.data[category]?.slice(0, 10)?.map((item) => {
+        result.total_ave.push({
+          key: category,
+          author_id: item.author_id,
+          label: item.label,
+          value: item.count || 0,
+          color: '#00D7A3',
+          tooltipInfo: {},
+        });
+      });
+    } else if (category === JSON.stringify(keywords[2]).toLowerCase()) {
+      response?.data[category]?.slice(0, 10)?.map((item) => {
+        result.prominence.push({
+          key: category,
+          author_id: item.author_id,
+          label: item.label,
+          value: item.count || 0,
+          color: '#FF9315',
+          tooltipInfo: {},
+        });
+      });
+    } else if (category === JSON.stringify(keywords[3]).toLowerCase()) {
+      response?.data[category]?.slice(0, 10)?.map((item) => {
+        result.sentiment.push({
+          key: category,
+          author_id: item.author_id,
+          label: item.label,
+          // value: item.net_sentiment < 0 ? 0 : item.net_sentiment || 0,
+          value: item.count,
+          color: '#22AAFF',
+          tooltipInfo: {},
+        });
+      });
+    } else if (category === JSON.stringify(keywords[4]).toLowerCase()) {
+      response?.data[category]?.slice(0, 10)?.map((item) => {
+        result.competition_Five.push({
+          key: category,
+          author_id: item.author_id,
+          label: item.label,
+          // value: item.net_sentiment < 0 ? 0 : item.net_sentiment || 0,
+          value: item.count,
+          color: '#fa4d56',
+          tooltipInfo: {},
+        });
+      });
+    }
   });
-  mapData.shouldShowGraph = response?.total_count;
+
+  mapData.data.no_articles.data = result?.no_articles;
+  mapData.data.total_reach.data = result?.total_reach;
+  mapData.data.total_ave.data = result?.total_ave;
+  mapData.data.prominance.data = result?.prominence;
+  mapData.data.sentiment.data = result?.sentiment;
+  mapData.data.competition_Five.data = result?.competition_Five;
+
+  mapData.data[brand] = mapData?.data?.no_articles;
+  delete mapData?.data?.no_articles;
+  mapData.data[keywords[0]] = mapData?.data?.total_reach;
+  delete mapData?.data?.total_reach;
+  mapData.data[keywords[1]] = mapData?.data?.total_ave;
+  delete mapData?.data?.total_ave;
+  mapData.data[keywords[2]] = mapData?.data?.prominance;
+  delete mapData?.data?.prominance;
+  mapData.data[keywords[3]] = mapData?.data?.sentiment;
+  delete mapData?.data?.sentiment;
+  mapData.data[keywords[4]] = mapData?.data?.competition_Five;
+  delete mapData?.data?.competition_Five;
+
+  const filteredData = {};
+  for (const key in mapData?.data) {
+    if (key !== 'undefined') {
+      filteredData[key] = mapData?.data[key];
+    }
+  }
+
+  mapData.data = filteredData;
+
   return mapData;
+
+  // setting total count
+  // const totalArticlesMapData = mapData.data.summary;
+  // const totalCount = response?.total_count ? response?.total_count : 0;
+  // totalArticlesMapData.value = String(addCountPrefix(totalCount));
+  // mapData.data.summary = totalArticlesMapData;
+
+  // // setting data
+  // mapData.data.data = response?.data
+  //   ? response?.data?.slice(0, 10)?.map((x) => {
+  //       const label = x.label;
+  //       const refinedXData = removeQuotesFromObjectKeys(x);
+  //       return {
+  //         ...refinedXData,
+  //         ...x,
+  //         label,
+  //       };
+  //     })
+  //   : [];
+  // // setting labels for graph
+  // mapData.data.labels = [
+  //   ...comp.map((k) => k.toLowerCase()),
+  //   ...brand.map((k) => k.toLowerCase()),
+  // ]?.map((x) => {
+  //   return {
+  //     label: x,
+  //     value: String(x).toLowerCase(),
+  //   };
+  // });
+  // mapData.shouldShowGraph = response?.total_count;
+  // return mapData;
 };
 
 export const useJournalistCoverageComp = (
@@ -786,50 +904,159 @@ export const getSourcesComp = async (payload, brand, comp) => {
   }
 
   const mapData = JSON.parse(JSON.stringify(sourcesMapData));
+  const totalArticlesMapData = mapData.summary;
+  totalArticlesMapData.value = String(addCountPrefix(response?.total_count));
+  mapData.summary = totalArticlesMapData;
+
+  const result = {
+    no_articles: [],
+    prominence: [],
+    sentiment: [],
+    total_ave: [],
+    total_reach: [],
+    competition_Five: [],
+  };
+
+  Object.keys(response?.data).forEach((category, index) => {
+    // for (let i = 0; i === dataLenght; i++) {
+    if (category === JSON.stringify(brand.toString()).toLowerCase()) {
+      response?.data[category]?.slice(0, 10)?.map((item) => {
+        result.no_articles.push({
+          key: category,
+          label: item.source,
+          value: item.count || 0,
+          color: '#DE1D83',
+          tooltipInfo: {},
+        });
+      });
+    } else if (category === JSON.stringify(keywords[0]).toLowerCase()) {
+      response?.data[category]?.slice(0, 10)?.map((item) => {
+        result.total_reach.push({
+          key: category,
+          label: item.source,
+          value: item.count || 0,
+          color: '#8393C7',
+          tooltipInfo: {},
+        });
+      });
+    } else if (category === JSON.stringify(keywords[1]).toLowerCase()) {
+      response?.data[category]?.slice(0, 10)?.map((item) => {
+        result.total_ave.push({
+          key: category,
+          label: item.source,
+          value: item.count || 0,
+          color: '#00D7A3',
+          tooltipInfo: {},
+        });
+      });
+    } else if (category === JSON.stringify(keywords[2]).toLowerCase()) {
+      response?.data[category]?.slice(0, 10)?.map((item) => {
+        result.prominence.push({
+          key: category,
+          label: item.source,
+          value: item.count || 0,
+          color: '#FF9315',
+          tooltipInfo: {},
+        });
+      });
+    } else if (category === JSON.stringify(keywords[3]).toLowerCase()) {
+      response?.data[category]?.slice(0, 10)?.map((item) => {
+        result.sentiment.push({
+          key: category,
+          label: item.source,
+          // value: item.net_sentiment < 0 ? 0 : item.net_sentiment || 0,
+          value: item.count,
+          color: '#22AAFF',
+          tooltipInfo: {},
+        });
+      });
+    } else if (category === JSON.stringify(keywords[4]).toLowerCase()) {
+      response?.data[category]?.slice(0, 10)?.map((item) => {
+        result.competition_Five.push({
+          key: category,
+          label: item.source,
+          // value: item.net_sentiment < 0 ? 0 : item.net_sentiment || 0,
+          value: item.count,
+          color: '#fa4d56',
+          tooltipInfo: {},
+        });
+      });
+    }
+  });
+
+  mapData.data.no_articles.data = result?.no_articles;
+  mapData.data.total_reach.data = result?.total_reach;
+  mapData.data.total_ave.data = result?.total_ave;
+  mapData.data.prominance.data = result?.prominence;
+  mapData.data.sentiment.data = result?.sentiment;
+  mapData.data.competition_Five.data = result?.competition_Five;
+
+  mapData.data[brand] = mapData?.data?.no_articles;
+  delete mapData?.data?.no_articles;
+  mapData.data[keywords[0]] = mapData?.data?.total_reach;
+  delete mapData?.data?.total_reach;
+  mapData.data[keywords[1]] = mapData?.data?.total_ave;
+  delete mapData?.data?.total_ave;
+  mapData.data[keywords[2]] = mapData?.data?.prominance;
+  delete mapData?.data?.prominance;
+  mapData.data[keywords[3]] = mapData?.data?.sentiment;
+  delete mapData?.data?.sentiment;
+  mapData.data[keywords[4]] = mapData?.data?.competition_Five;
+  delete mapData?.data?.competition_Five;
+
+  const filteredData = {};
+  for (const key in mapData?.data) {
+    if (key !== 'undefined') {
+      filteredData[key] = mapData?.data[key];
+    }
+  }
+
+  mapData.data = filteredData;
+
   // mapData.shouldShowGraph = true;
   // return mapData;
 
   // setting total count
-  const totalArticlesMapData = mapData.data.summary;
-  const totalCount = response?.total_count ? response?.total_count : 0;
-  totalArticlesMapData.value = String(addCountPrefix(totalCount));
-  mapData.data.summary = totalArticlesMapData;
+  // const totalArticlesMapData = mapData.data.summary;
+  // const totalCount = response?.total_count ? response?.total_count : 0;
+  // totalArticlesMapData.value = String(addCountPrefix(totalCount));
+  // mapData.data.summary = totalArticlesMapData;
 
-  // setting data
-  const updatedData = response?.data?.map((x) => {
-    const result = {};
-    result.label = x.source_label;
-    const value = [];
-    Object.keys(x).forEach((y) => {
-      if (y !== 'source_label' && y !== 'source_count') {
-        const keywordsData = {};
-        keywordsData.label = y;
-        keywordsData.value = x[y]?.buckets?.map((doc) => {
-          return {
-            label: doc?.key,
-            value: doc?.doc_count,
-          };
-        });
-        value.push({ ...keywordsData });
-      }
-    });
-    result.value = value?.sort((a, b) => a?.label?.localeCompare(b?.label));
-    return result;
-  });
+  // // setting data
+  // const updatedData = response?.data?.map((x) => {
+  //   const result = {};
+  //   result.label = x.source_label;
+  //   const value = [];
+  //   Object.keys(x).forEach((y) => {
+  //     if (y !== 'source_label' && y !== 'source_count') {
+  //       const keywordsData = {};
+  //       keywordsData.label = y;
+  //       keywordsData.value = x[y]?.buckets?.map((doc) => {
+  //         return {
+  //           label: doc?.key,
+  //           value: doc?.doc_count,
+  //         };
+  //       });
+  //       value.push({ ...keywordsData });
+  //     }
+  //   });
+  //   result.value = value?.sort((a, b) => a?.label?.localeCompare(b?.label));
+  //   return result;
+  // });
 
-  const filteredData = updatedData.filter((x) => {
-    const isEmpty = x.value.some((keyword) => keyword?.value.length > 0);
-    return isEmpty;
-  });
-  mapData.data.data = filteredData ? filteredData?.slice(0, 10) : [];
-  // setting labels for graph
-  mapData.data.legends = [...brand, ...comp]?.sort()?.map((x) => {
-    return {
-      label: x,
-      value: String(x),
-    };
-  });
-  mapData.shouldShowGraph = response?.total_count;
+  // const filteredData = updatedData.filter((x) => {
+  //   const isEmpty = x.value.some((keyword) => keyword?.value.length > 0);
+  //   return isEmpty;
+  // });
+  // mapData.data.data = filteredData ? filteredData?.slice(0, 10) : [];
+  // // setting labels for graph
+  // mapData.data.legends = [...brand, ...comp]?.sort()?.map((x) => {
+  //   return {
+  //     label: x,
+  //     value: String(x),
+  //   };
+  // });
+  // mapData.shouldShowGraph = response?.total_count;
   return mapData;
 };
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Img } from '../../assets/img';
+// import DarkLogo from '../../assets/img/bg/DarkLogo.svg';
+import NewAMXLogo from '../../assets/img/app/Alphametricx-logo-mark-dark.png';
 import { useLocation, useNavigate } from 'react-router-dom/dist';
 import {
   OTPAcceptTCWrp,
@@ -223,7 +224,7 @@ const OTPVerificationLogin = () => {
               }
             }}
           >
-            <OTPAlphaIcon src={Img.DarkLogo} />
+            <OTPAlphaIcon src={NewAMXLogo} />
             <OTPTitleWrp>OTP Verification</OTPTitleWrp>
             <OTPTitleDescpSec>
               Please input the 6 digit OTP sent to{' '}

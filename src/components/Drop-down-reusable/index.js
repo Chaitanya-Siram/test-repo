@@ -74,5 +74,5 @@ ReusableDropDown.propTypes = {
   frontIcon: PropTypes.element,
   navigation: PropTypes.func,
   childNavigation: PropTypes.func,
-  id: PropTypes.string
+  id: PropTypes.string,
 };

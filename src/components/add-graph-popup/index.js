@@ -20,7 +20,7 @@ import {
 } from '../custom-drawer/new-canvas/index.sc';
 import { theme } from '../../constants/theme';
 
-import { Img } from '../../assets/img';
+import NpCustomis from '../../assets/img/np_customize.svg';
 import TileSelector from '../tile-selector';
 import { TileComponent } from '../custom-drawer/tile-component';
 import { useSelector } from 'react-redux';
@@ -85,7 +85,7 @@ const AddGraphpop = ({
     <DrawerContentBox>
       <Headerwrap>
         <Headerleftwpr>
-          {showEditIcon && <Imgwpr src={Img.NpCustomis} alt="" />}
+          {showEditIcon && <Imgwpr src={NpCustomis} alt="" />}
           <Heaerlblwrp>{heading}</Heaerlblwrp>
         </Headerleftwpr>
         <Iconwpr onClick={handleToggle}>

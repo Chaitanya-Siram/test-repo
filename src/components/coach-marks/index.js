@@ -66,7 +66,8 @@ const CoachMarks = ({ steps: stepsConfig, toggler }) => {
         const popoverEle = document.getElementById('lb-popover');
 
         const align = elementLeft > window.innerWidth / 2 ? 'left' : 'right';
-        const verticalAlign = elementBottom < window.innerHeight / 2 ? 'bottom' : 'top';
+        const verticalAlign =
+          elementBottom < window.innerHeight / 2 ? 'bottom' : 'top';
 
         // console.log(align, 'align');
 
@@ -75,19 +76,29 @@ const CoachMarks = ({ steps: stepsConfig, toggler }) => {
       `;
         // Conditionally add 'left' or 'right' based on the 'align' variable
         if (align === 'left') {
-          popoverEleStyleString += window?.location?.pathname?.includes('create-news-letter')
-            ? `left:  ${((elementLeft - elementWidth) + 3 * 16)}px;`
+          popoverEleStyleString += window?.location?.pathname?.includes(
+            'create-news-letter'
+          )
+            ? `left:  ${elementLeft - elementWidth + 3 * 16}px;`
             : `left:  ${elementLeft - elementWidth - 1.5 * 16}px;`;
           // 1.5rem is the current padding value for left and right of app
         } else {
           // The below is logic for add content button.
-          stepsConfig[currentIndex]?.id === 'coach-add-news-letter-wrp' && window?.location?.pathname?.includes('create-news-letter')
-            ? popoverEleStyleString += `left:  ${((elementLeft - elementWidth) + 4 * 16)
-            }px;` : popoverEleStyleString += `left:  ${(elementLeft + elementRight) / 2
-            }px;`;
+          stepsConfig[currentIndex]?.id === 'coach-add-news-letter-wrp' &&
+          window?.location?.pathname?.includes('create-news-letter')
+            ? (popoverEleStyleString += `left:  ${
+                elementLeft - elementWidth + 4 * 16
+              }px;`)
+            : (popoverEleStyleString += `left:  ${
+                (elementLeft + elementRight) / 2
+              }px;`);
         }
-        if (verticalAlign === 'top' && (stepsConfig[currentIndex]?.id === 'coach-add-remove-charts-wrap' || stepsConfig[currentIndex]?.id === 'coach-add-news-letter-wrp')) {
-          popoverEleStyleString += `top: ${(elementBottom - 250)}px;`;// 1.5rem is the current padding value for left and right of app
+        if (
+          verticalAlign === 'top' &&
+          (stepsConfig[currentIndex]?.id === 'coach-add-remove-charts-wrap' ||
+            stepsConfig[currentIndex]?.id === 'coach-add-news-letter-wrp')
+        ) {
+          popoverEleStyleString += `top: ${elementBottom - 250}px;`; // 1.5rem is the current padding value for left and right of app
         }
 
         if (stepsConfig[currentIndex]?.intro) {

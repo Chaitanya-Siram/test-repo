@@ -7,7 +7,8 @@ import {
   ValidationWrp,
   ValidationsListWrp,
 } from './index.sc';
-import { Img } from '../../assets/img';
+import Cancel from '../../assets/img/cancel.png';
+import Check from '../../assets/img/check.png';
 import PropTypes from 'prop-types';
 
 const PasswordValidator = ({ passwordValidationResult, activeField }) => {
@@ -21,9 +22,9 @@ const PasswordValidator = ({ passwordValidationResult, activeField }) => {
         <ValidationsListWrp>
           <ValidateIcon>
             {passwordValidationResult?.isUpperCaseValid ? (
-              <img src={Img.Check} alt="check" />
+              <img src={Check} alt="check" />
             ) : (
-              <img src={Img.Cancel} alt="check" />
+              <img src={Cancel} alt="check" />
             )}
           </ValidateIcon>
           <ValidationText>Include UpperCase</ValidationText>
@@ -31,9 +32,9 @@ const PasswordValidator = ({ passwordValidationResult, activeField }) => {
         <ValidationsListWrp>
           <ValidateIcon>
             {passwordValidationResult?.isLowerCaseValid ? (
-              <img src={Img.Check} alt="check" />
+              <img src={Check} alt="check" />
             ) : (
-              <img src={Img.Cancel} alt="check" />
+              <img src={Cancel} alt="check" />
             )}
           </ValidateIcon>
           <ValidationText>Include Lowercase</ValidationText>
@@ -41,9 +42,9 @@ const PasswordValidator = ({ passwordValidationResult, activeField }) => {
         <ValidationsListWrp>
           <ValidateIcon>
             {passwordValidationResult?.isNumberValid ? (
-              <img src={Img.Check} alt="check" />
+              <img src={Check} alt="check" />
             ) : (
-              <img src={Img.Cancel} alt="check" />
+              <img src={Cancel} alt="check" />
             )}
           </ValidateIcon>
           <ValidationText>Include Number</ValidationText>
@@ -51,9 +52,9 @@ const PasswordValidator = ({ passwordValidationResult, activeField }) => {
         <ValidationsListWrp>
           <ValidateIcon>
             {passwordValidationResult?.isSpecialCharactersValid ? (
-              <img src={Img.Check} alt="check" />
+              <img src={Check} alt="check" />
             ) : (
-              <img src={Img.Cancel} alt="check" />
+              <img src={Cancel} alt="check" />
             )}
           </ValidateIcon>
           <ValidationText>Include Special Character</ValidationText>
@@ -61,9 +62,9 @@ const PasswordValidator = ({ passwordValidationResult, activeField }) => {
         <ValidationsListWrp>
           <ValidateIcon>
             {passwordValidationResult?.isLengthValid ? (
-              <img src={Img.Check} alt="check" />
+              <img src={Check} alt="check" />
             ) : (
-              <img src={Img.Cancel} alt="check" />
+              <img src={Cancel} alt="check" />
             )}
           </ValidateIcon>
           <ValidationText>Min 12 characters</ValidationText>

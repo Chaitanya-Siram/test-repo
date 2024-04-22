@@ -1,9 +1,5 @@
 import React, { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import Error from '../components/error';
-// import { useSelector } from 'react-redux';
-// import { contents } from '../constants/mock';
-import LoginPage from '../pages/login';
 import RequireAuth from '../hooks/useAuth';
 import { roles } from '../constants';
 import Unauthorized from '../components/unauthorized';
@@ -13,24 +9,51 @@ import NewslettersIcon from '../assets/icons/NewslettersIcon';
 import MediaDatabashIcon from '../assets/icons/MediaDatabashIcon';
 import SettingIcon from '../assets/icons/SettingIcon';
 // temp
-import TermsAndConditions from '../components/terms-and-conditions-privacy-policy';
-import FAQpt2 from '../components/FAQ-component/Part2';
+// import TermsAndConditions from '../components/terms-and-conditions-privacy-policy';
+// import FAQpt2 from '../components/FAQ-component/Part2';
 
-import ContactUs from '../components/contact-us';
-import Advanced from '../components/search-result/dashboard-section/dashboard-header/advanced';
-import DateRangeComp from '../components/Calendar/Calendar';
-import DownLoadPdf from '../pages/download-pdf';
-import GraphTest from '../components/graph-test';
+// import ContactUs from '../components/contact-us';
+// import Advanced from '../components/search-result/dashboard-section/dashboard-header/advanced';
+// import DateRangeComp from '../components/Calendar/Calendar';
+// import DownLoadPdf from '../pages/download-pdf';
+// import GraphTest from '../components/graph-test';
 import CircularLoading from '../assets/icons/loading/circularLoading';
 import { theme } from '../constants/theme';
 import { PageLoadingWrp } from '../assets/icons/loading/circularLoading.sc';
 // const LazyPageNotFound = lazy(() => import());
 import Proptypes from 'prop-types';
-import OTPVerificationLogin from '../pages/otp-verification-login';
-import ForgotPassword from '../pages/forgot-password';
-import CreatePassword from '../pages/create-password';
-import CreatePasswordReset from '../pages/create-password-reset';
+// import OTPVerificationLogin from '../pages/otp-verification-login';
+// import ForgotPassword from '../pages/forgot-password';
+// import CreatePassword from '../pages/create-password';
+// import CreatePasswordReset from '../pages/create-password-reset';
 import WrapperCompoent from '../pages/new-dashboard/wrapper-compoent';
+// import LoginPage from '../pages/login';
+
+const Error = lazy(() => import('../components/error'));
+const LoginPage = lazy(() => import('../pages/login'));
+
+const DateRangeComp = lazy(() => import('../components/Calendar/Calendar'));
+const Advanced = lazy(() =>
+  import(
+    '../components/search-result/dashboard-section/dashboard-header/advanced'
+  )
+);
+const ContactUs = lazy(() => import('../components/contact-us'));
+const TermsAndConditions = lazy(() =>
+  import('../components/terms-and-conditions-privacy-policy')
+);
+const FAQpt2 = lazy(() => import('../components/FAQ-component/Part2'));
+const DownLoadPdf = lazy(() => import('../pages/download-pdf'));
+const GraphTest = lazy(() => import('../components/graph-test'));
+const OTPVerificationLogin = lazy(() =>
+  import('../pages/otp-verification-login')
+);
+const ForgotPassword = lazy(() => import('../pages/forgot-password'));
+
+const CreatePassword = lazy(() => import('../pages/create-password'));
+const CreatePasswordReset = lazy(() =>
+  import('../pages/create-password-reset')
+);
 
 const LazyHome = lazy(() => import('../pages/home'));
 const LazyPageNotFound = lazy(() => import('../components/page-not-fount'));

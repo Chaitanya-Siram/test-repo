@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { Img } from '../../assets/img';
+import Group from '../../assets/img/loginImg/Group.svg';
+import Rect1 from '../../assets/img/loginImg/Rect1.png';
+import Rect2 from '../../assets/img/loginImg/Rect2.png';
+import Rect3 from '../../assets/img/loginImg/Rect3.png';
+
 import { Link } from 'react-router-dom';
 // import { style } from 'd3';
 
@@ -140,11 +144,12 @@ export const LogoTextwpr = styled.div`
 `;
 
 export const LogoImgwpr = styled.img`
-  width: 2.9375rem;
-  height: 2.5rem;
+  width: 4rem;
+  height: 3rem;
   display: flex;
   align-self: stretch;
   margin-bottom: 1.25rem;
+  margin-left: -0.7rem;
 `;
 
 export const backgroundImage = styled.div`
@@ -245,8 +250,8 @@ export const LoginBtn = styled.button`
 `;
 
 export const LinkWrp = styled.div`
- display:flex;
- gap: 1rem;
+  display: flex;
+  gap: 1rem;
 `;
 
 export const LightGray = styled(Link)`
@@ -285,7 +290,7 @@ export const Dot = styled.div`
 export const GroupAbstract = styled.div`
   width: 100%;
   height: 60%;
-  background-image: url(${Img.Group});
+  background-image: url(${Group});
   background-repeat: no-repeat;
 `;
 
@@ -302,19 +307,19 @@ export const SlidesWrpr = styled.div`
 export const SliderImage1 = styled.div`
   width: 31.5625rem;
   height: 20.3125rem;
-  background-image: url(${Img.Rect1});
+  background-image: url(${Rect1});
   background-size: cover;
 `;
 export const SliderImage2 = styled.div`
   width: 31.5625rem;
   height: 20.3125rem;
-  background-image: url(${Img.Rect2});
+  background-image: url(${Rect2});
   background-size: cover;
 `;
 export const SliderImage3 = styled.div`
   width: 31.5625rem;
   height: 20.3125rem;
-  background-image: url(${Img.Rect3});
+  background-image: url(${Rect3});
   background-size: cover;
 `;
 

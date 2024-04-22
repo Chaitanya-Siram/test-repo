@@ -23,10 +23,10 @@ export const SlotDetailsMainWrp = styled.div`
 `;
 export const IconBox = styled.div`
   cursor: auto;
-  position: absolute;
+  /* position: absolute; */
   /* width: 5.75rem; */
   display: flex;
-  z-index: 1;
+  /* z-index: 1; */
   justify-content: space-between;
   align-items: start;
   top: 0rem;

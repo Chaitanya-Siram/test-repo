@@ -4,7 +4,7 @@ import { Frames } from '../../search-popup/contents';
 import { ContentBox } from '../../search-popup/ContentBox';
 import PropTypes from 'prop-types';
 // import { axiosPostRequest, axiosPutRequest } from '../../../service';
-import { useQueryClient } from '@tanstack/react-query';
+// import { useQueryClient } from '@tanstack/react-query';
 import DashboardPopup from '../../dasboard-popup';
 import CustomConfirmationPopUp from '../../customize-confirmation-popup';
 import SaveSourcePopup from '../../save-source';
@@ -33,7 +33,7 @@ const DashboardTable = ({
 }) => {
   const [checkeditems, setCheckedItems] = useState([]);
   const [bookmarkedItems, setBookmarkedItems] = useState([]);
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const [confirmationPopUp, setConfirmationPopUp] = useState(false);
   const [savePopup, setSavePopup] = useState(false);
   const [selectedItem, setSeleteditem] = useState({});

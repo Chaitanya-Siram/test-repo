@@ -105,14 +105,16 @@ const GridDashboard = ({
   // const location = useLocation();
   const authInfo = getTokenData();
   const [active, setActive] = useState(0);
-  const [activeSearchId, setActiveSearchId] = useState(0);
+  // const [activeSearchId, setActiveSearchId] = useState(0);
   const [savePopup, setSavePopup] = useState(false);
 
   const [dashType, setDashType] = useState('');
-  const [loader, setLoader] = useState(false);
+  // const [loader, setLoader] = useState(false);
+  const loader = false;
   const [articleType, setArticleType] = useState(articleTypeDefault);
   const [type, setType] = useState('totalArticles');
   const [page, setPage] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [floatingPagination, setfloatingPagination] = useState(false);
   // const [activeScreen, setActiveScreen] = useState('dashboard');
   const [selectedDashboard, setSelectedDashboard] = useState({});
@@ -121,7 +123,7 @@ const GridDashboard = ({
   const [dateTimeAvailable, setDateTimeAvailable] = useState(false);
   const handleListClick = (item) => {
     setActive(item?.id);
-    setActiveSearchId(item?.searchId);
+    // setActiveSearchId(item?.searchId);
     setDashType(item?.type);
     console.log({ item });
     setSelectedDashboard(item);

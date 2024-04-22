@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Img } from '../../assets/img';
+// import DarkLogo from '../../assets/img/bg/DarkLogo.svg';
+import NewAMXLogo from '../../assets/img/app/Alphametricx-logo-mark-dark.png';
 import { useNavigate } from 'react-router-dom/dist';
 import {
   ForgotPasswordAlphaIcon,
@@ -76,7 +77,7 @@ const ForgotPassword = () => {
             Build Analytics with intelligence
           </ForgotPasswordLeftContainer>
           <ForgotPasswordRightContainer onSubmit={onClickContinue}>
-            <ForgotPasswordAlphaIcon src={Img.DarkLogo} />
+            <ForgotPasswordAlphaIcon src={NewAMXLogo} />
             <ForgotPasswordTitleWrp>Forgot Password?</ForgotPasswordTitleWrp>
             <ForgotPasswordTitleDescpSec>
               No worries, please enter the email id registered with your

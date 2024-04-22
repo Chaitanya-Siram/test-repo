@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Img } from '../../assets/img';
+import LoginBg2 from '../../assets/img/loginImg/LoginBg2.png';
 
 export const ForgotPasswordCreatePasswordWrp = styled.div`
-  background-image: url(${Img.LoginBg2});
+  background-image: url(${LoginBg2});
   background-size: 180%; /* You can use 'cover' to make the background cover the entire container */
   background-position: center; /* Center the background image */
   height: 100vh; /* Set the height to 100% of the viewport height */
@@ -48,11 +48,12 @@ export const ForgotPasswordRightContainer = styled.form`
 `;
 
 export const ForgotPasswordAlphaIcon = styled.img`
-  width: 2.9375rem;
-  height: 2.5rem;
+  width: 4rem;
+  height: 3rem;
   display: flex;
   align-self: stretch;
   margin-bottom: 1.25rem;
+  margin-left: -0.7rem;
 `;
 
 export const ForgotPasswordTitleWrp = styled.h1`

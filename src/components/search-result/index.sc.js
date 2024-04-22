@@ -963,10 +963,10 @@ export const IconBox = styled.div`
   cursor: auto;
   /* position: ${({ isSavePopup }) =>
     isSavePopup ? 'relative' : 'absolute'}; */
-  position: absolute;
+  /* position: absolute; */
   /* width: 5.75rem; */
   display: flex;
-  z-index: ${({ isSavePopup }) => (isSavePopup ? '0' : '1')};
+  /* z-index: ${({ isSavePopup }) => (isSavePopup ? '0' : '1')}; */
   /* justify-content: ${({ isSavePopup }) =>
     isSavePopup ? 'flex-end' : 'space-between'}; */
   justify-content: space-between;

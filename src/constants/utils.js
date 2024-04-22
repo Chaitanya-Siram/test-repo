@@ -446,8 +446,8 @@ export function getDashboardSearchQuery(
       // console.log({ rawData });
       return {
         ...defaultFilter,
-        competition_keywords: [otherInfo?.d?.labelText],
-        brand_keywords: [otherInfo?.d?.labelText],
+        competition_keywords: [rawData?.key || otherInfo?.d?.label],
+        brand_keywords: [rawData?.key || otherInfo?.d?.label],
         author: rawData?.label,
         author_id: rawData?.author_id,
       };
@@ -456,9 +456,11 @@ export function getDashboardSearchQuery(
     case 'coverage_by_source': {
       return {
         ...defaultFilter,
-        competition_keywords: [otherInfo?.d?.parentData?.label],
-        brand_keywords: [otherInfo?.d?.parentData?.label],
-        source_includes: [otherInfo?.d?.parentData?.parentData?.label],
+        competition_keywords: [rawData?.key || otherInfo?.d?.parentData?.label],
+        brand_keywords: [rawData?.key || otherInfo?.d?.parentData?.label],
+        source_includes: [
+          rawData?.label || otherInfo?.d?.parentData?.parentData?.label,
+        ],
       };
     }
 
@@ -676,13 +678,7 @@ export const combineImagesWithLogo = async (
   ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
   // Draw the logo in the top-left corner with padding
-  ctx.drawImage(
-    logoImage,
-    padding,
-    padding,
-    logoImage.width * 3,
-    logoImage.height * 3
-  );
+  ctx.drawImage(logoImage, padding, padding, logoImage.width, logoImage.height);
 
   // Draw the combined image below and to the right of the logo
   ctx.drawImage(

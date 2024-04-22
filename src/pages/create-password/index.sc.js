@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { Img } from '../../assets/img';
+import LoginBg2 from '../../assets/img/loginImg/LoginBg2.png';
 
 export const CreatePasswordWrp = styled.div`
   width: 100%;
   height: calc(100vh - 30px);
-  background-image: url(${Img.LoginBg2});
+  background-image: url(${LoginBg2});
   background-size: cover;
   background-position: center;
   display: flex;
@@ -56,11 +56,12 @@ export const RightContainer = styled.div`
 `;
 
 export const AlphaIcon = styled.img`
-  width: 2.9375rem;
-  height: 2.5rem;
+  width: 4rem;
+  height: 3rem;
   display: flex;
   align-self: stretch;
   margin-bottom: 1.25rem;
+  margin-left: -0.7rem;
 `;
 
 export const TitleWrp = styled.h1`

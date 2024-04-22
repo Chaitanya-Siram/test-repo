@@ -47,7 +47,7 @@ import CoachStep1 from '../../assets/img/coachmarks/step1.svg';
 import CoachStep2 from '../../assets/img/coachmarks/step2.svg';
 import CoachStep3 from '../../assets/img/coachmarks/step3.svg';
 import CoachStep4 from '../../assets/img/coachmarks/step4.svg';
-import { Img } from '../../assets/img';
+import Image from '../../assets/img/image.svg';
 import { getTokenData } from '../../constants/validateToken';
 
 const AppHeader = () => {
@@ -210,9 +210,8 @@ const AppHeader = () => {
               <CoachMarksBody>
                 {/* <CoachLabel>Competition</CoachLabel> */}
                 <CoachDescription>
-                  Add competition keywords.
-                  Or leave it empty if you want to analyze
-                  the only the primary brand.
+                  Add competition keywords. Or leave it empty if you want to
+                  analyze the only the primary brand.
                 </CoachDescription>
               </CoachMarksBody>
             </CoachMarksWrp>
@@ -301,9 +300,7 @@ const AppHeader = () => {
               <CoachMarksImg src={CoachStep4} />
               <CoachMarksBody>
                 {/* <CoachLabel>Brand</CoachLabel> */}
-                <CoachDescription>
-                  Add new camapign
-                </CoachDescription>
+                <CoachDescription>Add new camapign</CoachDescription>
               </CoachMarksBody>
             </CoachMarksWrp>
           ),
@@ -332,9 +329,7 @@ const AppHeader = () => {
               <CoachMarksImg src={CoachStep4} />
               <CoachMarksBody>
                 {/* <CoachLabel>Brand</CoachLabel> */}
-                <CoachDescription>
-                  Add new congruence
-                </CoachDescription>
+                <CoachDescription>Add new congruence</CoachDescription>
               </CoachMarksBody>
             </CoachMarksWrp>
           ),
@@ -383,7 +378,7 @@ const AppHeader = () => {
               </CoachMarksBody>
             </CoachMarksWrp>
           ),
-        }
+        },
       ];
     } else if (window?.location?.pathname?.includes('custom-search')) {
       return [
@@ -440,9 +435,8 @@ const AppHeader = () => {
               <CoachMarksBody>
                 {/* <CoachLabel>Competition</CoachLabel> */}
                 <CoachDescription>
-                  Add competition keywords.
-                  Or leave it empty if you want to analyze
-                  the only the primary brand.
+                  Add competition keywords. Or leave it empty if you want to
+                  analyze the only the primary brand.
                 </CoachDescription>
               </CoachMarksBody>
             </CoachMarksWrp>
@@ -456,8 +450,7 @@ const AppHeader = () => {
               <CoachMarksBody>
                 {/* <CoachLabel>Brand</CoachLabel> */}
                 <CoachDescription>
-                  Add person keywords.
-                  Or leave it empty if you want to analyze
+                  Add person keywords. Or leave it empty if you want to analyze
                   the only the primary brand.
                 </CoachDescription>
               </CoachMarksBody>
@@ -514,9 +507,7 @@ const AppHeader = () => {
             <CoachMarksWrp>
               <CoachMarksImg src={CoachStep4} />
               <CoachMarksBody>
-                <CoachDescription>
-                  Add send date
-                </CoachDescription>
+                <CoachDescription>Add send date</CoachDescription>
               </CoachMarksBody>
             </CoachMarksWrp>
           ),
@@ -527,9 +518,7 @@ const AppHeader = () => {
             <CoachMarksWrp>
               <CoachMarksImg src={CoachStep4} />
               <CoachMarksBody>
-                <CoachDescription>
-                  Add send time
-                </CoachDescription>
+                <CoachDescription>Add send time</CoachDescription>
               </CoachMarksBody>
             </CoachMarksWrp>
           ),
@@ -540,9 +529,7 @@ const AppHeader = () => {
             <CoachMarksWrp>
               <CoachMarksImg src={CoachStep4} />
               <CoachMarksBody>
-                <CoachDescription>
-                  Publish the news letter
-                </CoachDescription>
+                <CoachDescription>Publish the news letter</CoachDescription>
               </CoachMarksBody>
             </CoachMarksWrp>
           ),
@@ -559,7 +546,7 @@ const AppHeader = () => {
               </CoachMarksBody>
             </CoachMarksWrp>
           ),
-        }
+        },
       ];
     }
   }, [firstName]);
@@ -569,26 +556,26 @@ const AppHeader = () => {
       <AppHeaderWrp>
         <AppHeaderLeft>
           <AppLogo to="/">
-            <AppLogoSpan /> AlphaMetricX
+            <AppLogoSpan />
           </AppLogo>
         </AppHeaderLeft>
         <AppHeaderRight>
           {tokenData?.role !== 'Analyst' && (
             <>
               {(window?.location?.pathname === '/' ||
-                ((window?.location?.pathname?.includes('custom-search'))) ||
-                (!dashboardId && (window?.location?.pathname?.includes('brand') ||
-                  window?.location?.pathname?.includes('people') ||
-                  window?.location?.pathname?.includes('campaign') ||
-                  window?.location?.pathname?.includes('congruence') ||
-                  window?.location?.pathname?.includes('primpact') ||
-                  window?.location?.pathname?.includes('custom'))) ||
-                window?.location?.pathname?.includes('create-news-letter')
-              ) && (
-                  <CoachStartLabel onClick={() => setOpenCoachMark(true)}>
-                    Start Tour
-                  </CoachStartLabel>
-                )}
+                window?.location?.pathname?.includes('custom-search') ||
+                (!dashboardId &&
+                  (window?.location?.pathname?.includes('brand') ||
+                    window?.location?.pathname?.includes('people') ||
+                    window?.location?.pathname?.includes('campaign') ||
+                    window?.location?.pathname?.includes('congruence') ||
+                    window?.location?.pathname?.includes('primpact') ||
+                    window?.location?.pathname?.includes('custom'))) ||
+                window?.location?.pathname?.includes('create-news-letter')) && (
+                <CoachStartLabel onClick={() => setOpenCoachMark(true)}>
+                  Start Tour
+                </CoachStartLabel>
+              )}
               <Tooltip content="FAQ">
                 <NavIcon src={helpIcon} onClick={handleFAQClick}></NavIcon>
               </Tooltip>
@@ -611,9 +598,9 @@ const AppHeader = () => {
           >
             <NavUserProfileTitle>{firstName}</NavUserProfileTitle>
             <NavUserProfileImg
-              profileImage={Img.Image}
-            // onClick={() => setIsDropdownOpen(!isDropDownOpen)}
-            // ref={dropdownRef}
+              profileImage={Image}
+              // onClick={() => setIsDropdownOpen(!isDropDownOpen)}
+              // ref={dropdownRef}
             >
               {isDropDownOpen && (
                 <UserProfileCard>

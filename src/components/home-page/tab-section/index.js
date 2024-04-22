@@ -121,7 +121,7 @@ const TabSection = () => {
                     loader={loader}
                     type="l1"
                     dashboardType={item.dashboardType}
-                    handleOnClick={() => { }}
+                    handleOnClick={() => {}}
                   />
                 ),
                 l2: (
@@ -290,7 +290,10 @@ const TabSection = () => {
             width="62.75rem"
           />
         </Tabwpr>
-        <Custombtnwpr id="coach-customize-canvas" onClick={() => setShowCustom(true)}>
+        <Custombtnwpr
+          id="coach-customize-canvas"
+          onClick={() => setShowCustom(true)}
+        >
           <Customize
             color={theme[selectedTheme].primary}
             width="1.1rem"
@@ -308,7 +311,7 @@ const TabSection = () => {
               setConfirmationPopUp={setConfirmationPopUp}
               handleSelectedTab={handleSelectedTab}
               canvasData={canvasData}
-            // isList={false}
+              // isList={false}
             />
           }
           width="62.75rem"
