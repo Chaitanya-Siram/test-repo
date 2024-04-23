@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from '../../button';
@@ -13,7 +16,7 @@ import {
   useUpdateArticleTags,
 } from '../../../hooks/useSearch';
 import toast from 'react-hot-toast';
-// import { articleTags } from '../../../redux/slices/searchSlice';
+import { articleTags } from '../../../redux/slices/searchSlice';
 
 const Boxwpr = styled.div`
   width: 15.25rem;
@@ -98,20 +101,20 @@ const TagBox = ({
   storeArticleCommentsTags,
   setStoreTags,
 }) => {
-  // const [fetchTags, setFetchTags] = useState(true);
+  const [fetchTags, setFetchTags] = useState(true);
 
-  // const tagValue = data?.storeTags?.find(
-  //   (tag) => data?.ele?.articleId === tag?.article_id
-  // );
+  const tagValue = data?.storeTags?.find(
+    (tag) => data?.ele?.articleId === tag?.article_id
+  );
 
-  // const initialtagsArray = data?.ele?.tags
-  //   ? data?.ele?.tags
-  //   : tagValue
-  //   ? tagValue?.tags.split(',')
-  //   : [];
+  const initialtagsArray = data?.ele?.tags
+    ? data?.ele?.tags
+    : tagValue
+    ? tagValue?.tags.split(',')
+    : [];
   const [text, setText] = useState('');
   const [tags, setTags] = useState(data?.tags || []);
-  // const [tiggerTag, setTiggerTag] = useState(false);
+  const [tiggerTag, setTiggerTag] = useState(false);
 
   // const { state } = useLocation();
 
@@ -129,7 +132,6 @@ const TagBox = ({
   const { mutate: addTags } = useMutation({ mutationFn: addArticleTags }); // dummy
   const { mutateAsync: addTag } = useCreateTagsBySearchId();
   const { mutateAsync: deleteArticleTag } = useDeleteArticleTagBySearchId();
-  // eslint-disable-next-line no-unused-vars
   const { mutateAsync: editArticleTag } = useUpdateArticleTags();
 
   const selectedTheme = useSelector((store) => {
@@ -157,7 +159,7 @@ const TagBox = ({
   const handleClick = async () => {
     try {
       addTags(tags);
-      // setTiggerTag(true);
+      setTiggerTag(true);
       // if (tags?.length !== 0) {
       addTag(payload).then((data) => {
         if (data.isSuccessful) {
@@ -173,7 +175,7 @@ const TagBox = ({
       console.log(err);
     } finally {
       setShow(false);
-      // setTiggerTag(false);
+      setTiggerTag(false);
     }
   };
 
@@ -324,11 +326,6 @@ TagBox.propTypes = {
     ele: PropTypes.any,
     type: PropTypes.string,
     page: PropTypes.number,
-    storeTags: PropTypes.any,
-    tags: PropTypes.any,
-    articlesRecentSearchId: PropTypes.any,
-    isSuccessful: PropTypes.bool,
-    articleId: PropTypes.number,
   }),
   setShow: PropTypes.func,
   setTriggerFetchUseEffect: PropTypes.func,

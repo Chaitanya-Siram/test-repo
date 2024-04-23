@@ -5,7 +5,7 @@ export const SimpleDropDown = styled.div`
   right: 0;
   top: 2rem;
   background: ${({ theme }) => theme.background};
-  z-index: 10000;
+  z-index: 10;
   border-radius: 0.3125rem;
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   flex-direction: column;

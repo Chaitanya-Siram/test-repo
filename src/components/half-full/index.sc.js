@@ -389,23 +389,23 @@ export const EmptyWrp = styled.div`
   gap: 2rem;
 `;
 export const EmptySubText = styled.div`
-  color: #585858;
-  font-family: Inter;
-  font-size: 0.75rem;
-  // font-size: rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1.1875rem; /* 158.333% */
-  letter-spacing: -0.015rem;
+color:color: #585858;
+font-family: Inter;
+font-size: 0.75rem;
+// font-size: rem;
+font-style: normal;s
+font-weight: 500;
+line-height: 1.1875rem; /* 158.333% */
+letter-spacing: -0.015rem;
 `;
 
 export const LinkText = styled(NavLink)`
-  text-decoration: none;
-  color: #5f39f8;
-  font-family: Inter;
-  font-size: 0.75rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 1.1875rem; /* 158.333% */
-  letter-spacing: -0.015rem;
+text-decoration:none;
+color: #5F39F8;
+font-family: Inter;
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 600;
+line-height: 1.1875rem; /* 158.333% */
+letter-spacing: -0.015rem;s
 `;

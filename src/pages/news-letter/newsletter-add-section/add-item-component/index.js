@@ -404,13 +404,13 @@ const AddItem = ({
             updatedColumnResults?.length > 0
               ? updatedColumnResults
               : [
-                  {
-                    label: '',
-                    broadcast: '0',
-                    print: '0',
-                    online: '0',
-                  },
-                ];
+                {
+                  label: '',
+                  broadcast: '0',
+                  print: '0',
+                  online: '0',
+                },
+              ];
 
           resp = resultOverTimeMapData?.area;
         } else if (value === 'Geographical Breakdown') {
@@ -758,20 +758,20 @@ const AddItem = ({
             value?.title === 'Sentiment'
               ? 1
               : value.title === 'Media Type'
-              ? 2
-              : value.title === 'Top Author'
-              ? 3
-              : value.title === 'Geographical Breakdown'
-              ? 4
-              : value.title === 'Result Over Time'
-              ? 5
-              : value.title === 'Word Cloud'
-              ? 6
-              : value.title === 'Top Themes'
-              ? 7
-              : value.title === 'Outlet Breakdown'
-              ? 8
-              : '';
+                ? 2
+                : value.title === 'Top Author'
+                  ? 3
+                  : value.title === 'Geographical Breakdown'
+                    ? 4
+                    : value.title === 'Result Over Time'
+                      ? 5
+                      : value.title === 'Word Cloud'
+                        ? 6
+                        : value.title === 'Top Themes'
+                          ? 7
+                          : value.title === 'Outlet Breakdown'
+                            ? 8
+                            : '';
           const dataToPush = {
             componentData: {
               ...value,
@@ -1009,9 +1009,9 @@ const AddItem = ({
                   article_id: newObj?.newsletterId || newObj?.newsletterid,
                   syndication_data: newObj?.shouldShowOption
                     ? newObj?.similarData?.map((y, yIndex) => ({
-                        ...y,
-                        sr_no: yIndex + 1,
-                      }))
+                      ...y,
+                      sr_no: yIndex + 1,
+                    }))
                     : [],
                 });
 
@@ -1023,9 +1023,9 @@ const AddItem = ({
                       ...resp?.data?.data,
                       syndication_data: newObj?.shouldShowOption
                         ? newObj?.similarData?.map((y, yIndex) => ({
-                            ...y,
-                            sr_no: yIndex + 1,
-                          }))
+                          ...y,
+                          sr_no: yIndex + 1,
+                        }))
                         : [],
                       shouldShowOption: newObj?.shouldShowOption,
                     },
@@ -1254,11 +1254,11 @@ const AddItem = ({
           btnTxt={btnTxt}
         />
       )}
-      <AddItemWrp>
+      <AddItemWrp >
         <SectionWrp>
           <SectionTextWrp>
             <IconWrp
-              id="coach-add-news-letter-wrp"
+              id='coach-add-news-letter-wrp'
               onClick={() => {
                 setShowOptions(true);
               }}
@@ -1275,7 +1275,7 @@ const AddItem = ({
                             {(typeAdded === 'saved_graph' ||
                               typeAdded === 'graphs' ||
                               typeAdded === 'upload_image') &&
-                            option?.addOption === 'articles'
+                              option?.addOption === 'articles'
                               ? ''
                               : ` Add ${option.label}`}
                           </OptionTextSpan>

@@ -184,7 +184,7 @@ export function searchQueryForGraph(
   widget,
   selectedText,
   rawData,
-  otherInfo,
+  country,
   searchFilters
 ) {
   const defaultFilter = {
@@ -196,7 +196,7 @@ export function searchQueryForGraph(
       return {
         ...defaultFilter,
         // state: rawData,
-        countries: [otherInfo?.d?.properties?.iso_a2.toLowerCase()],
+        countries: [country?.d?.properties?.iso_a2.toLowerCase()],
       };
     case 'Media Type':
       return {
@@ -220,10 +220,10 @@ export function searchQueryForGraph(
         source_includes: [selectedText],
       };
     case 'Result Over Time': {
-      const dateFormat = identifyDateFormat(otherInfo?.d?.data?.date);
+      const dateFormat = identifyDateFormat(selectedText);
       if (dateFormat === 'Hour') {
-        const date = otherInfo?.d?.data?.date?.slice(0, 11);
-        const hours = otherInfo?.d?.data?.date?.slice(11);
+        const date = selectedText?.slice(0, 11);
+        const hours = selectedText?.slice(11);
         const convertHours = convertTimeHours(hours);
         const updatedSelectedText = `${date?.trim()}T${convertHours}`;
         const updatedEndDate = updatedSelectedText.slice(0, -2) + '59';
@@ -233,7 +233,7 @@ export function searchQueryForGraph(
           end_date: updatedEndDate,
         };
       } else if (dateFormat === 'Month') {
-        const monthRange = getDateMonthFirstLastDate(otherInfo?.d?.data?.date);
+        const monthRange = getDateMonthFirstLastDate(selectedText);
         const filterData = {
           startDate: searchFilters?.start_date,
           endDate: searchFilters?.end_date,
@@ -250,8 +250,8 @@ export function searchQueryForGraph(
       } else if (dateFormat === 'Day') {
         return {
           ...defaultFilter,
-          start_date: otherInfo?.d?.data?.date,
-          end_date: otherInfo?.d?.data?.date,
+          start_date: selectedText,
+          end_date: selectedText,
         };
       }
       break;
@@ -280,7 +280,7 @@ export function searchQueryForGraph(
     case 'Syndication': {
       return {
         ...defaultFilter,
-        syndication_article_title: rawData?.title,
+        syndication_reprint_group_id: rawData?.reprint_group_id,
         syndication_article_id: rawData?.articleId,
       };
     }
@@ -446,8 +446,8 @@ export function getDashboardSearchQuery(
       // console.log({ rawData });
       return {
         ...defaultFilter,
-        competition_keywords: [rawData?.key || otherInfo?.d?.label],
-        brand_keywords: [rawData?.key || otherInfo?.d?.label],
+        competition_keywords: [otherInfo?.d?.labelText],
+        brand_keywords: [otherInfo?.d?.labelText],
         author: rawData?.label,
         author_id: rawData?.author_id,
       };
@@ -456,11 +456,9 @@ export function getDashboardSearchQuery(
     case 'coverage_by_source': {
       return {
         ...defaultFilter,
-        competition_keywords: [rawData?.key || otherInfo?.d?.parentData?.label],
-        brand_keywords: [rawData?.key || otherInfo?.d?.parentData?.label],
-        source_includes: [
-          rawData?.label || otherInfo?.d?.parentData?.parentData?.label,
-        ],
+        competition_keywords: [otherInfo?.d?.parentData?.label],
+        brand_keywords: [otherInfo?.d?.parentData?.label],
+        source_includes: [otherInfo?.d?.parentData?.parentData?.label],
       };
     }
 
@@ -547,7 +545,7 @@ export function getDashboardSearchQuery(
     case 'Syndication': {
       return {
         ...defaultFilter,
-        syndication_article_title: rawData?.title,
+        syndication_reprint_group_id: rawData?.reprint_group_id,
         syndication_article_id: rawData?.articleId,
       };
     }
@@ -678,7 +676,13 @@ export const combineImagesWithLogo = async (
   ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
   // Draw the logo in the top-left corner with padding
-  ctx.drawImage(logoImage, padding, padding, logoImage.width, logoImage.height);
+  ctx.drawImage(
+    logoImage,
+    padding,
+    padding,
+    logoImage.width * 3,
+    logoImage.height * 3
+  );
 
   // Draw the combined image below and to the right of the logo
   ctx.drawImage(

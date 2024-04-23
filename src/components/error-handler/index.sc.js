@@ -13,20 +13,18 @@ export const ErrorHandlerContainer = styled.div`
 `;
 
 export const ErrorContentContainer = styled.div`
-  display: flex;
-  width: 28%;
-  padding: 2rem;
-  flex-direction: column;
-  border-radius: 1.25rem;
-  background: ${(props) => props?.backgroundColor};
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.09), 0 4px 2px rgba(0, 0, 0, 0.09),
-    0 8px 4px rgba(0, 0, 0, 0.09), 0 16px 8px rgba(0, 0, 0, 0.09),
-    0 32px 16px rgba(0, 0, 0, 0.09);
-  margin: 1% auto;
-  transform: translateY(200px);
-  animation: demo-load 0.3s ease-out;
-  animation-fill-mode: forwards;
-  animation-delay: 0.2s;
+display: flex;
+width: 28%;
+padding: 2rem;
+flex-direction: column;
+border-radius: 1.25rem;
+background: ${(props) => props?.backgroundColor};
+box-shadow: 0 2px 1px rgba(0, 0, 0, 0.09), 0 4px 2px rgba(0, 0, 0, 0.09), 0 8px 4px rgba(0, 0, 0, 0.09), 0 16px 8px rgba(0, 0, 0, 0.09), 0 32px 16px rgba(0, 0, 0, 0.09);
+margin: 1% auto;
+transform: translateY(200px);
+animation: demo-load 0.3s ease-out;
+animation-fill -mode: forwards;
+animation-delay: 0.2s;
 `;
 
 export const ErrorContentInfo = styled.div`

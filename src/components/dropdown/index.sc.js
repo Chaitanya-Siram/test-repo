@@ -26,10 +26,6 @@ export const DropdownContainer = styled.div`
   box-sizing: border-box;
   border-radius: 0.3125rem;
   border: 1px solid #dedede;
-  @media (max-width: 1250px) {
-    width: 12%;
-    height: 2.1rem;
-  }
   /* padding: 0.4375rem 0.5rem; */
 `;
 
@@ -49,10 +45,6 @@ export const DropdownButton = styled.button`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  @media (max-width: 1250px) {
-    padding: 0.2rem;
-    gap: 0.1rem;
-  }
 `;
 
 export const DropdownList = styled.ul`
@@ -110,10 +102,6 @@ export const Title = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  @media (max-width: 1250px) {
-    /* line-height: 1rem; */
-    font-size: 0.7rem;
-  }
 `;
 export const Checkbox = styled.input`
   margin-right: 0.5rem;
@@ -136,9 +124,6 @@ export const Selection = styled.div`
   font-weight: 700;
   line-height: 0.6875rem;
   color: ${({ theme }) => theme.logoText};
-  @media (max-width: 1250px) {
-    height: 1rem;
-  }
 `;
 export const CountIconWrapper = styled.div`
   /* width: 2.875rem; */
@@ -146,9 +131,6 @@ export const CountIconWrapper = styled.div`
   align-items: center;
   gap: 0.6875rem;
   margin-left: auto;
-  @media (max-width: 1250px) {
-    gap: 0.2rem;
-  }
 `;
 export const DropdownInputSearch = styled.input`
   box-sizing: border-box;
@@ -178,10 +160,6 @@ export const IconContainer = styled.div`
   height: 1.25rem;
   display: flex;
   align-items: center;
-  @media (max-width: 1250px) {
-    width: 1rem;
-    height: 1rem;
-  }
 `;
 export const DropdownFooter = styled.div`
   width: 100%;

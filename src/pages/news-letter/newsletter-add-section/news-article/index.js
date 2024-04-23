@@ -24,7 +24,7 @@ import {
   ToolBarWrp,
 } from './index.sc';
 import ToolBar from '../add-item-component/toolbar';
-import ArticleImageNAImg from '../../../../assets/img/NA for no image.svg';
+import { Img } from '../../../../assets/img';
 import ArticleTools from '../add-item-component/article-toolbar';
 import NewsLetterSection from '../add-item-component/section';
 import AddArticleComponent from '../add-item-component/add-article';
@@ -452,12 +452,12 @@ const NewsArticle = ({
                         (ele.image === 'NA' ||
                         ele.image === 'nan' ||
                         ele.image === ''
-                          ? ArticleImageNAImg
+                          ? Img.ArticleImageNAImg
                           : ele.image) ||
                         (ele.imagePublicUrl === 'NA' ||
                         ele.imagePublicUrl === 'nan' ||
                         ele.imagePublicUrl === ''
-                          ? ArticleImageNAImg
+                          ? Img.ArticleImageNAImg
                           : ele.imagePublicUrl)
                       }
                     />
@@ -549,7 +549,7 @@ const NewsRenderImage = ({ url }) => {
   };
   return (
     <ArticleImageWrap
-      src={`${hasError ? ArticleImageNAImg : url}`}
+      src={`${hasError ? Img.ArticleImageNAImg : url}`}
       alt="article thumbnail"
       onLoad={handleImageLoad}
       onError={handleImageError}

@@ -15,8 +15,7 @@ import {
   TitleDescpSec,
   TotalWrp,
 } from './index.sc';
-// import DarkLogo from '../../assets/img/bg/DarkLogo.svg';
-import NewAMXLogo from '../../assets/img/app/Alphametricx-logo-mark-dark.png';
+import { Img } from '../../assets/img';
 import { TitleWrp } from '../../components/edit-graph-popup/index.sc';
 import { useNavigate, useSearchParams } from 'react-router-dom/dist';
 import VisiblityOff from '../../assets/icons/VisiblityOff';
@@ -198,7 +197,7 @@ const CreatePassword = () => {
             ''
           ) : userStatus === 'success' ? (
             <RightContainer errorMessageActive={isMessageVisible}>
-              <AlphaIcon src={NewAMXLogo} />
+              <AlphaIcon src={Img.DarkLogo} />
               <TitleWrp>Create Password</TitleWrp>
               <TitleDescpSec>
                 <b style={{ color: '#000' }}>
@@ -344,7 +343,7 @@ const CreatePassword = () => {
             </RightContainer>
           ) : (
             <RightContainer errorMessageActive={isMessageVisible}>
-              {/* <AlphaIcon src={DarkLogo} /> */}
+              {/* <AlphaIcon src={Img.DarkLogo} /> */}
               <TitleWrp>Link Expired</TitleWrp>
               <TitleDescpSec>
                 <b style={{ color: '#000' }}>This link has expired.</b> <br />

@@ -281,7 +281,6 @@ const DashboardList = ({
     } else {
       setActive(0);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataAmx]);
   const selectedTheme = useSelector((store) => {
     return store?.theme.theme || {};

@@ -229,7 +229,6 @@ const DashSearchDrwr = ({
   selectedSavedSearch,
   selectedDashboardItems,
   eventCycle,
-  isSaveAsSelected,
 }) => {
   const selectedTheme = useSelector((store) => {
     return store?.theme.theme || {};
@@ -321,7 +320,7 @@ const DashSearchDrwr = ({
     };
     try {
       setBtnTxt('Saving...');
-      if (searchId === 'custom-search' || isSaveAsSelected) {
+      if (searchId === 'custom-search') {
         await CreateSaveSearch(payload, {
           onSuccess: (searchData) => {
             const item = searchData?.data?.data;
@@ -350,7 +349,7 @@ const DashSearchDrwr = ({
                   state: {
                     filters: { ...filters, query },
                     search_name: item?.title,
-                    recent_searchId: parseInt(recentSearchArticlesId),
+                    recent_searchId: item?.recent_searchId,
                     // selectedItems: JSON.stringify(item),
                     selectedItems:
                       selectedPath.split('/')[3] === 'custom'
@@ -520,7 +519,6 @@ DashSearchDrwr.propTypes = {
   selectedSavedSearch: Proptypes.any,
   selectedDashboardItems: Proptypes.object,
   eventCycle: Proptypes.string,
-  isSaveAsSelected: Proptypes.bool,
 };
 
 // this is the formate how we have to use this component

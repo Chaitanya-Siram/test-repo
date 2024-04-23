@@ -28,13 +28,16 @@ const SearchSection = () => {
   };
 
   const handleSearchValue = (data, filters) => {
-    navigate('/search-results/custom-search/overview/recent-search-id', {
-      state: {
-        data: null,
-        filters,
-        isGuidedSearch: filters?.isGuidedSearch,
-      },
-    });
+    navigate(
+      `/search-results/custom-search/overview/${data?.recent_search_id}`,
+      {
+        state: {
+          data: null,
+          filters,
+          isGuidedSearch: filters?.isGuidedSearch,
+        },
+      }
+    );
   };
 
   const handleCancelSearch = () => {

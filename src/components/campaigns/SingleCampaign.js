@@ -22,7 +22,7 @@ const SingleCampaign = ({
     name: campaign.name,
     keywords: campaign.keywords,
   });
-  // const [setTimeoutId, setSetTimeoutId] = useState(null);
+  const [setTimeoutId, setSetTimeoutId] = useState(null);
 
   const handleFormChange = (event, fieldName) => {
     setFormData((prevFormData) => ({

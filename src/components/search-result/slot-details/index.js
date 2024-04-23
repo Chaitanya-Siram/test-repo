@@ -373,7 +373,6 @@ const SlotDetails = ({
             </SlotTitle>
             {/* <SlotSubTitle>{widget.subTitle}</SlotSubTitle> */}
           </SlotHeaderLeft>
-
           <IconBox type={type} isSavePopup={isSavePopup}>
             {/* <Iconwpr width={'1.5rem'} height={'1.5rem'} onClick={handleClick}>
           <ExpandIcon />
@@ -398,10 +397,7 @@ const SlotDetails = ({
                 <Iconwpr
                   width={'1.5rem'}
                   height={'1.5rem'}
-                  onClick={(e) => {
-                    console.log('it is calling');
-                    handleOptionIcon(e, graphData.component);
-                  }}
+                  onClick={(e) => handleOptionIcon(e, graphData.component)}
                   ref={downloadRef}
                   className="hide-downloading"
                 >
@@ -418,7 +414,6 @@ const SlotDetails = ({
               </>
             )}
           </IconBox>
-
           {/* {widget.enableTabs && (
             <SlotHeaderRight>
               <GraphTypeBtnWrapper>
@@ -451,7 +446,13 @@ const SlotDetails = ({
             type === 'dashboard' && commentary ? 'commentary' : ''
           }`}
         >
+          {/* {widget.enableTabs && <SlotBodyTabWrp></SlotBodyTabWrp>}
+          <SlotBodyTabBody enableTabs={widget.enableTabs}> */}
+          {/* {widget?.information && (
+              <TopInfowpr>{widget?.information}</TopInfowpr>
+            )} */}
           {loader ? (
+            // <Loader />
             <CircularLoading
               size="0.25rem"
               width="1.875rem"
@@ -468,6 +469,10 @@ const SlotDetails = ({
               rerender
             )
           )}
+          {/* </SlotBodyTabBody> */}
+          {/* {widget?.bottomDescription && (
+              <BottomDeswpr>{widget?.bottomDescription}</BottomDeswpr>
+            )} */}
           {showLineBar() && Object.keys(tooltipEvent).length > 0 && (
             <LineShow xAxis={tooltipEvent?.event?.offsetX + 2}></LineShow>
           )}

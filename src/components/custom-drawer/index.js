@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Proptypes, { object } from 'prop-types';
-import NpCustomis from '../../assets/img/np_customize.svg';
+import { Img } from '../../assets/img';
 import X from '../../assets/icons/X';
 import Tabs from '../tabs';
 import { PoptabTitleBox } from './mock';
@@ -80,7 +80,7 @@ const CustomDrawer = ({
       <DrawerContentBox>
         <Headerwrap>
           <Headerleftwpr>
-            {showEditIcon && <img src={NpCustomis} alt="" />}
+            {showEditIcon && <img src={Img.NpCustomis} alt="" />}
             <Heaerlblwrp>{heading}</Heaerlblwrp>
           </Headerleftwpr>
           <Iconwpr onClick={handleToggle}>

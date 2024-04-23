@@ -267,8 +267,8 @@ const NavSection = ({ handleNotificationClick }) => {
                       ele.label === 'Dashboards'
                         ? 'coach-create-dashboard-wrp'
                         : ele.label === 'Newsletters'
-                        ? 'coach-create-news-letters-wrp'
-                        : ''
+                          ? 'coach-create-news-letters-wrp'
+                          : ''
                     }
                     active={isHoveredDiv === i}
                   >

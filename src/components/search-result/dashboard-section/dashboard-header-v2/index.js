@@ -34,20 +34,20 @@ import toast from 'react-hot-toast';
 // import { CustomListItem } from './CustomListItem';
 
 export default function DashboardHeaderV2({
-  handleSaveDashboard = () => {},
+  handleSaveDashboard = () => { },
   activeScreen,
-  setConfimationAlertPopUp = () => {},
+  setConfimationAlertPopUp = () => { },
   changeSaved,
-  setSelectedPath = () => {},
-  setShowSavedSearch = () => {},
-  setOverViewClick = () => {},
-  setPathName = () => {},
+  setSelectedPath = () => { },
+  setShowSavedSearch = () => { },
+  setOverViewClick = () => { },
+  setPathName = () => { },
   prevSavedSearch = {},
   selectedSavedSearch,
   filters,
   recentSearchArticlesId,
   isProcessing = false,
-  setSelectedDashboardItems = () => {},
+  setSelectedDashboardItems = () => { },
 }) {
   const { searchId } = useParams();
   const selectedTheme = useSelector((store) => {
@@ -283,16 +283,15 @@ export default function DashboardHeaderV2({
           )}
         </Heading>
         <NewsLetterButton
-          id="coach-create-news-letters-wrp"
-          onClick={navigateNewsletter}
-        >
+          id='coach-create-news-letters-wrp'
+          onClick={navigateNewsletter}>
           <Add2 height={'1rem'} color={'#675ef2'} />
           {/* <ButtonText>Create Newsletter</ButtonText> */}
           Create Newsletter
         </NewsLetterButton>
         <ReusableDropDown
           dropdownArray={dropdownOptions}
-          id="coach-create-dashboard-wrp"
+          id='coach-create-dashboard-wrp'
           label="Create Dashboard"
           frontIcon={<Add2 height={'1rem'} color={'#fff'}></Add2>}
           navigation={createDashboard}

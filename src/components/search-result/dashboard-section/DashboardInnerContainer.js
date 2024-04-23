@@ -16,7 +16,7 @@ import ResultOverTime from './result-over-time';
 import SlotPlaceHolder from '../slot-details/SlotPlaceHolder';
 import { axiosGet } from '../../../service';
 import { useLocation, useParams } from 'react-router-dom';
-// import { baseURL } from '../../../constants';
+import { baseURL } from '../../../constants';
 import { useQuery } from '@tanstack/react-query';
 import CircularLoading from '../../../assets/icons/loading/circularLoading';
 import { StatesWithMapData } from '../../../hooks/data/states';
@@ -31,10 +31,7 @@ import {
   standardDashboards,
   people,
 } from '../../../constants/widgets';
-// import LogoWithText from '../../../assets/img/bg/logoWithText.svg';
-import AMXlogo from '../../../assets/img/app/Alphametricx-logo-mark-dark.png';
-// import { Img } from '../../../assets/img';
-import JournalistAndSourceGraph from '../../advanced-dashboard/author-impact';
+import { Img } from '../../../assets/img';
 
 const noLegends = ['top_source', 'top_author', 'volume_analysis'];
 
@@ -181,7 +178,7 @@ const DashboardInnerContainer = ({
     Array.from(elementsToSetOpacity).forEach((element) => {
       element.style.opacity = '0';
     });
-    const logoUrl = AMXlogo; // Update with the correct path to your logo
+    const logoUrl = Img.LogoWithText; // Update with the correct path to your logo
 
     try {
       let dataUrl;
@@ -190,7 +187,7 @@ const DashboardInnerContainer = ({
         dataUrl = await toPng(containerElement, { pixelRatio: 4 });
       } else if (option.type === 'PDF') {
         // Use html-to-image to capture the container as an image
-        dataUrl = await toPng(containerElement, { pixelRatio: 4 });
+        dataUrl = await toJpeg(containerElement, { pixelRatio: 4 });
       } else {
         throw new Error('Invalid download type. Use "Image" or "PDF".');
       }
@@ -206,7 +203,7 @@ const DashboardInnerContainer = ({
       });
 
       // Reset the background color of the container
-      containerElement.style.backgroundColor = 'white';
+      containerElement.style.backgroundColor = 'transparent';
 
       if (option.type === 'Image') {
         const imageDataUrlWithLogo = await combineImagesWithLogo(
@@ -307,7 +304,7 @@ const DashboardInnerContainer = ({
         rawData = statesData?.short;
       }
     } else if (widget?.title === 'Result Over Time') {
-      title = d?.data?.label;
+      title = d?.data?.date;
       if (widget?.graphType === 'result_over_time_column') {
         title = d?.date;
       }
@@ -332,7 +329,7 @@ const DashboardInnerContainer = ({
       title = rawData?.label;
     }
     if (uniqueId === 'coverage_by_source') {
-      title = graphSelection || d?.parentData?.parentData?.label;
+      title = d?.parentData?.parentData?.label;
     }
 
     setArticleType((prev) => ({
@@ -483,46 +480,6 @@ const DashboardInnerContainer = ({
         </FullSlot>
       );
     } else {
-      if (
-        widget?.component === 'coverage_by_journalist' &&
-        widget?.title === 'Coverage by Journalist'
-      ) {
-        return (
-          <JournalistAndSourceGraph
-            widget={widgetData}
-            loader={isLoading}
-            dashboardType={dashboardType}
-            handleOnClick={(event, d) =>
-              handleOnClick(event, d, widget, idx, data?.customClassName)
-            }
-            downloadFunction={onDownload}
-            setSelectedComponent={setSelectedComponent}
-            graphDownloading={graphDownloading}
-            editChart={savedChartConfig}
-            widgetClassName={data?.customClassName}
-          />
-        );
-      }
-      if (
-        widget?.component === 'coverage_by_source' &&
-        widget?.title === 'Coverage by Sources'
-      ) {
-        return (
-          <JournalistAndSourceGraph
-            widget={widgetData}
-            loader={isLoading}
-            dashboardType={dashboardType}
-            handleOnClick={(event, d) =>
-              handleOnClick(event, d, widget, idx, data?.customClassName)
-            }
-            downloadFunction={onDownload}
-            setSelectedComponent={setSelectedComponent}
-            graphDownloading={graphDownloading}
-            editChart={savedChartConfig}
-            widgetClassName={data?.customClassName}
-          />
-        );
-      }
       return (
         <HalfSlot
           className="graph-widget"
@@ -628,7 +585,7 @@ const DashboardInnerContainer = ({
             )}
           </FullSlot>
         )}
-        {sentimeWidgetDetails?.show ? (
+        {sentimeWidgetDetails?.show && sentimeWidgetDetails?.data ? (
           GetDashboardComponent(
             sentimeWidgetDetails?.data,
             1,
@@ -638,7 +595,7 @@ const DashboardInnerContainer = ({
         ) : (
           <> </>
         )}
-        {mediaTypeWidgetDetails?.show ? (
+        {mediaTypeWidgetDetails?.show && mediaTypeWidgetDetails?.data ? (
           GetDashboardComponent(
             mediaTypeWidgetDetails?.data,
             2,
@@ -648,7 +605,7 @@ const DashboardInnerContainer = ({
         ) : (
           <> </>
         )}
-        {wordCloudWidgetDetails?.show ? (
+        {wordCloudWidgetDetails?.show && wordCloudWidgetDetails?.data ? (
           GetDashboardComponent(
             wordCloudWidgetDetails?.data,
             3,
@@ -658,7 +615,7 @@ const DashboardInnerContainer = ({
         ) : (
           <> </>
         )}
-        {topSourceWidgetDetails?.show ? (
+        {topSourceWidgetDetails?.show && topSourceWidgetDetails?.data ? (
           GetDashboardComponent(
             topSourceWidgetDetails?.data,
             4,
@@ -668,7 +625,7 @@ const DashboardInnerContainer = ({
         ) : (
           <> </>
         )}
-        {topThemeWidgetDetails?.show ? (
+        {topThemeWidgetDetails?.show && topThemeWidgetDetails?.data ? (
           GetDashboardComponent(
             topThemeWidgetDetails?.data,
             5,
@@ -678,7 +635,7 @@ const DashboardInnerContainer = ({
         ) : (
           <> </>
         )}
-        {topAuthorWidgetDetails?.show ? (
+        {topAuthorWidgetDetails?.show && topAuthorWidgetDetails?.data ? (
           GetDashboardComponent(
             topAuthorWidgetDetails?.data,
             6,
@@ -688,7 +645,8 @@ const DashboardInnerContainer = ({
         ) : (
           <> </>
         )}
-        {outletMediaTypeWidgetDetails?.show ? (
+        {outletMediaTypeWidgetDetails?.show &&
+        outletMediaTypeWidgetDetails?.data ? (
           GetDashboardComponent(
             outletMediaTypeWidgetDetails?.data,
             7,
@@ -698,7 +656,7 @@ const DashboardInnerContainer = ({
         ) : (
           <> </>
         )}
-        {geographicalWidgetDetails?.show ? (
+        {geographicalWidgetDetails?.show && geographicalWidgetDetails?.data ? (
           GetDashboardComponent(
             geographicalWidgetDetails?.data,
             8,
@@ -966,7 +924,8 @@ const DashboardInnerContainer = ({
             />
           </FullSlot>
         )} */}
-        {volumeAnalysisWidgetDetails?.show ? (
+        {volumeAnalysisWidgetDetails?.show &&
+        volumeAnalysisWidgetDetails?.data ? (
           GetDashboardComponent(
             volumeAnalysisWidgetDetails?.data,
             7,

@@ -34,7 +34,7 @@ const Brand = ({
   hideCompetitionKeywords = false,
   hideBrandKeywords = false,
   maxBrandKeywords = 1,
-  setStoringKeywords = () => {},
+  setStoringKeywords = () => { },
 }) => {
   const brandKeywords = useMemo(
     () => tabKeywords?.brandKeywords || [],
@@ -272,7 +272,7 @@ const Brand = ({
                   ))}
                   {brandData?.length <= maxBrandKeywords - 1 && (
                     <AddKeyword
-                      coachMarkId="coach-brand-keywords-wrp"
+                      coachMarkId='coach-brand-keywords-wrp'
                       handleSendKeyword={handleReceiveBrandKeyword}
                       isDisabled={brandData?.length >= maxBrandKeywords}
                     />
@@ -352,7 +352,7 @@ const Brand = ({
                   ))}
                   {competitionData?.length < 5 && (
                     <AddKeyword
-                      coachMarkId="coach-competition-keywords-wrp"
+                      coachMarkId='coach-competition-keywords-wrp'
                       handleSendKeyword={handleReceiveCompetitionKeyword}
                       isDisabled={competitionData?.length >= 5}
                     />
@@ -363,7 +363,7 @@ const Brand = ({
           </AddContentWrp>
           {!hideAnalyze && (
             <Button
-              coachMarkId="coach-brand-competition-analyze-wrp"
+              coachMarkId='coach-brand-competition-analyze-wrp'
               title={'Analyze'}
               backgroundColor={theme[selectedTheme].primary}
               onClick={handleAnalyze}

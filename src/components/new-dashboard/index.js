@@ -87,7 +87,7 @@ const NewDashboard = ({
   industryCoverageByJournalistsWidgetDetails,
   industryPublicationsWidgetDetails,
   recentSearchId,
-  isSavePopup,
+  isSavePopup
 }) => {
   const selectedTheme = useSelector((store) => {
     return store?.theme.theme || {};
@@ -243,7 +243,7 @@ const NewDashboard = ({
         </div>
         {addRemoveConfig.includes(dashboardType) && (
           <Button
-            coachMarkId="coach-add-remove-charts-wrap"
+            coachMarkId='coach-add-remove-charts-wrap'
             title={'Add/Remove Charts'}
             backgroundColor={theme[selectedTheme].background}
             color={theme[selectedTheme].primary}
@@ -321,7 +321,7 @@ const NewDashboard = ({
         customCanvas={selectedItems}
         selected={null}
         loader={false}
-        setSelected={() => {}}
+        setSelected={() => { }}
         volumeAnalysisWidgetDetails={volumeAnalysisWidgetDetails}
         sentimentAnalysisWidgetDetails={sentimentAnalysisWidgetDetails}
         sentimeOverTimeWidgetDetails={sentimeOverTimeWidgetDetails}
@@ -407,7 +407,7 @@ const NewDashboard = ({
               dashType={dashboardType}
               subDashType={
                 customData?.competitionData?.length > 0 &&
-                customData?.brandData?.length > 0
+                  customData?.brandData?.length > 0
                   ? 'competition'
                   : 'brand'
               }
@@ -459,7 +459,7 @@ NewDashboard.propTypes = {
   industryCoverageByJournalistsWidgetDetails: PropTypes.object,
   industryPublicationsWidgetDetails: PropTypes.object,
   recentSearchId: PropTypes.number,
-  isSavePopup: PropTypes.bool,
+  isSavePopup: PropTypes.bool
 };
 
 export default NewDashboard;

@@ -32,7 +32,7 @@ const People = (props) => {
     handler,
     handleSubmit,
     handleUpdates,
-    setStoringKeywords = () => {},
+    setStoringKeywords = () => { },
   } = props;
   const [peopleData, setPeopleData] = useState(
     tabKeywords?.peopleKeywords || []
@@ -186,16 +186,15 @@ const People = (props) => {
                 ))}
                 {peopleData?.length < 1 && (
                   <AddKeyword
-                    coachMarkId="coach-people-keywords-wrp"
-                    handleSendKeyword={handleReceiveKeyword}
-                  />
+                    coachMarkId='coach-people-keywords-wrp'
+                    handleSendKeyword={handleReceiveKeyword} />
                 )}
               </AddItemContainer>
             </AddContentContainer>
           </AddContentWrp>
           {!hideAnalyze && (
             <Button
-              coachMarkId="coach-people-analyze-wrp"
+              coachMarkId='coach-people-analyze-wrp'
               title="Analyze"
               backgroundColor={theme[selectedTheme].primary}
               color={theme[selectedTheme].logoText}

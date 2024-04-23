@@ -15,7 +15,7 @@ const Button = ({
   iconPosition,
   onClick,
   border,
-  coachMarkId,
+  coachMarkId
 }) => {
   // console.log(disable, 'string disabled');
   const theme = {};
@@ -71,7 +71,7 @@ Button.propTypes = {
   disableStyle: PropTypes.object,
   onClick: PropTypes.func,
   border: PropTypes.string,
-  coachMarkId: PropTypes.string,
+  coachMarkId: PropTypes.string
 };
 Button.defaultProps = {
   // props default values

@@ -148,7 +148,6 @@ const SearchResult = () => {
   const [loader, setLoader] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [showSavedSearch, setShowSavedSearch] = useState(false);
-  const [saveAsSelected, setSaveAsSelected] = useState(false);
   const [showSaved, setShowSaved] = useState(false);
   const [showNewCandrwr, setShowNewCandrwr] = useState(false);
   const [resetSelection, setResetSelection] = useState(true);
@@ -162,18 +161,12 @@ const SearchResult = () => {
   const [selectedPath, setSelectedPath] = useState('');
   const [selectedDashboardItems, setSelectedDashboardItems] = useState({});
   const [changeSaved, setChangeSaved] = useState(searchId !== 'custom-search');
-  const selectedSavedSearch = location?.state?.savedSearchData;
 
   const [isDocDownloading, setIsDocDownloading] = useState(false);
   const [sydicationArticles, setSydicationArticles] = useState([]);
   const [sydicationActive, setSydicationActive] = useState(false);
-  const [recentSearchArticlesId, setRecentSearchArticlesId] = useState(
-    selectedSavedSearch?.recent_search_id
-      ? selectedSavedSearch?.recent_search_id
-      : isNaN(+savedSearchId)
-      ? 0
-      : parseInt(savedSearchId)
-  );
+  const [recentSearchArticlesId, setRecentSearchArticlesId] =
+    useState(savedSearchId);
   const shouldSaveSearch = useRef(false);
   const [isCustomPagiNationFlag, setIsCustomPagiNationFlag] = useState(false);
 
@@ -191,7 +184,7 @@ const SearchResult = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [eventCycle, setEventCycle] = useState(true);
   const [articleSocketData, setArticleSocketData] = useState([]);
-  const [isLoadingData, setIsLoadingData] = useState(true);
+  const [isLoadingData, setIsLoadingData] = useState(false);
   const [socketPaging, setSocketPaging] = useState({
     pageNumber: 1,
     pageSize: 50,
@@ -204,7 +197,6 @@ const SearchResult = () => {
   const [fetchInBackground, setFetchInBackground] = useState(false);
   const [triggerLiveSearch, setTriggerLiveSearch] = useState(false);
   const [isDataPreprocessed, setIsDataPreprocessed] = useState(false);
-  const [resetTimer, setResetTimer] = useState(false);
 
   // const [guidedSearch, setGuidedSearch] = useState({
   //   all: '',
@@ -253,7 +245,6 @@ const SearchResult = () => {
     const timerId = setTimeout(() => {
       setEventCycle((old) => {
         if (old) {
-          responseCountsRef.current = 2;
           refetchAllData();
         }
         return false;
@@ -263,12 +254,15 @@ const SearchResult = () => {
 
     // Cleanup function to clear the timeout
     return () => clearTimeout(timerId);
-  }, [eventCycle, isDataPreprocessed, resetTimer]);
+  }, [eventCycle]);
 
   const handleOpenClcik = () => {
     setShowCustomComponent(!showCustomComponent);
     setDropdownOpen(!dropdownOpen);
   };
+
+  const selectedSavedSearch = location?.state?.savedSearchData;
+  const isCreatedFresh = useRef(!!location?.state?.isCreatedFresh);
 
   // Access the complete URL
   const fullURL = location.pathname + location.search;
@@ -422,6 +416,10 @@ const SearchResult = () => {
           total: 0,
         });
       } else {
+        selectedSavedSearch
+          ? setRecentSearchArticlesId(selectedSavedSearch?.recent_search_id)
+          : parseInt(searchData?.data?.recent_search_id) &&
+            setRecentSearchArticlesId(searchData?.data?.recent_search_id);
         setArticles(searchData?.data?.data);
         setHiddenArticlesLocal([]);
         setBookmarksLocal([]);
@@ -441,11 +439,8 @@ const SearchResult = () => {
   }, [isSuccess, searchData, selectedSavedSearch]);
 
   useEffect(() => {
-    if (type === 'totalArticles' && searchData?.data?.paged) {
-      setSearchTotalData(
-        [{ key: 'Online', doc_count: searchData?.data?.paged?.total ?? 0 }] ||
-          []
-      );
+    if (type === 'totalArticles' && searchData?.data?.media_types) {
+      setSearchTotalData(searchData?.data?.media_types || []);
     }
   }, [searchData, type]);
 
@@ -457,6 +452,10 @@ const SearchResult = () => {
 
   React.useEffect(() => {
     if (isInSearchSuccess) {
+      selectedSavedSearch
+        ? setRecentSearchArticlesId(selectedSavedSearch?.recent_search_id)
+        : setRecentSearchArticlesId(searchData?.data?.recent_search_id);
+
       setInSearchArticles(inSearchData?.data?.data);
       setHiddenArticlesLocal([]);
       setBookmarksLocal([]);
@@ -1017,6 +1016,7 @@ const SearchResult = () => {
         refresh_api: true,
         recent_search_id: recentSearchArticlesId,
       });
+      isCreatedFresh.current = false;
       setTriggerLiveSearch((old) => !old);
     }
     handleCancelSearch();
@@ -1221,6 +1221,7 @@ const SearchResult = () => {
     setFilters(data);
     setTags([]);
     setTriggerLiveSearch((old) => !old);
+    isCreatedFresh.current = false;
     if (!editMode) {
       page !== 0 && setPage(0);
     }
@@ -1259,20 +1260,8 @@ const SearchResult = () => {
       const data = JSON.parse(JSON.parse(event?.data));
       if (data?.response_status === 'SEARCH_SUBMITTED') {
         if (data?.data?.searchId) {
-          if (!recentSearchIdRef?.current) {
-            setRecentSearchArticlesId(
-              selectedSavedSearch?.recent_search_id
-                ? selectedSavedSearch?.recent_search_id
-                : isNaN(+savedSearchId)
-                ? data?.data?.searchId
-                : parseInt(savedSearchId)
-            );
-          } else {
-            setRecentSearchArticlesId(data?.data?.searchId);
-          }
           recentSearchIdRef.current = data?.data?.searchId;
           setIsDataPreprocessed(false);
-          setResetTimer((old) => !old);
           responseCountsRef.current = 0;
         }
       } else if (
@@ -1316,9 +1305,7 @@ const SearchResult = () => {
       ) {
         responseCountsRef.current = responseCountsRef.current + 1;
         setIsDataPreprocessed(true);
-        setTimeout(() => {
-          refetchAllData();
-        }, 2 * 1000);
+        refetchAllData();
       } else if (
         data?.response_status === 'ALL_SENTIMENTS_READY' &&
         recentSearchIdRef.current === data?.data?.search_id
@@ -1334,7 +1321,12 @@ const SearchResult = () => {
   }, []);
 
   useEffect(() => {
-    if (searchFilterOptions.length > 0 && page === 0 && isConnected) {
+    if (
+      searchFilterOptions.length > 0 &&
+      page === 0 &&
+      isConnected &&
+      !isCreatedFresh.current
+    ) {
       const message = JSON.stringify({
         user_id: authInfo?.user_id,
         ...convertObjectValues(getPayloadForSearch(query)),
@@ -1737,7 +1729,8 @@ const SearchResult = () => {
         searchFilters = {
           ...searchFilters,
           ...graphFilter,
-          syndication_article_title: inSearchArticleType?.rawData?.title,
+          syndication_reprint_group_id:
+            inSearchArticleType?.rawData?.reprint_group_id,
           syndication_article_id: inSearchArticleType?.rawData?.articleId,
         };
       } else {
@@ -1874,7 +1867,7 @@ const SearchResult = () => {
       return true;
     }
 
-    if (fetchInBackground || editMode) {
+    if (fetchInBackground) {
       return false;
     }
 
@@ -2021,8 +2014,6 @@ const SearchResult = () => {
     return graphData;
   };
 
-  console.log(articlePaging);
-
   return (
     <SearchPageWrp>
       <AppBG />
@@ -2090,14 +2081,7 @@ const SearchResult = () => {
                     {showCustomComponent && (
                       <DropDownCont>
                         {/* <DropDown onClick={handleSaveSearch}>Save</DropDown> */}
-                        <DropDown
-                          onClick={() => {
-                            setSaveAsSelected(true);
-                            handleSaveSearch();
-                          }}
-                        >
-                          Save As
-                        </DropDown>
+                        <DropDown onClick={handleSaveSearch}>Save As</DropDown>
                       </DropDownCont>
                     )}
                   </DropdownForButton>
@@ -2259,7 +2243,7 @@ const SearchResult = () => {
                 isLoading={eventCycle}
                 dashboardDetails={dashboardState}
                 tileDetails={
-                  !isDataPreprocessed
+                  eventCycle
                     ? socketDataTiles
                     : tileDetails?.map((x) => {
                         if (x?.title === 'Total Articles') {
@@ -2436,6 +2420,7 @@ const SearchResult = () => {
             activeScreen={activeScreen}
           >
             <ArticleSectionComponent
+              liveArticleCount={liveArticleCount}
               activeTheme={tags}
               setActiveTheme={setTags}
               syndicationClickData={inSearchArticleType}
@@ -2467,7 +2452,7 @@ const SearchResult = () => {
                   : articles
               }
               articlePagingInfo={
-                eventCycle
+                !isDataPreprocessed && !fetchInBackground
                   ? {
                       ...socketPaging,
                       pageNumber: articlePaging?.pageNumber ?? 1,
@@ -2511,7 +2496,18 @@ const SearchResult = () => {
                         count: 0,
                       },
                     ]
-                  : getTabs(searchTotalData || {})
+                  : getTabs(searchTotalData || {})?.map((tab) => {
+                      if (
+                        tab?.value === 'totalArticles' ||
+                        tab?.value === 'online'
+                      ) {
+                        return {
+                          ...tab,
+                          count: liveArticleCount,
+                        };
+                      }
+                      return { ...tab };
+                    })
               }
               onBtnClick={onBtnClick}
               setSydicationArticles={setSydicationArticles}
@@ -2623,10 +2619,7 @@ const SearchResult = () => {
       <DashboardPopup
         popContent={
           <DashSearchDrwr
-            toggler={(bool) => {
-              setShowSavedSearch(bool);
-              setSaveAsSelected(false);
-            }}
+            toggler={setShowSavedSearch}
             onHandleData={onSubmitData}
             filters={filters}
             guidedSection={guidedSection}
@@ -2641,17 +2634,11 @@ const SearchResult = () => {
             selectedSavedSearch={selectedSavedSearch}
             selectedDashboardItems={selectedDashboardItems}
             eventCycle={eventCycle}
-            isSaveAsSelected={saveAsSelected}
           />
         }
         padding="2rem"
         open={showSavedSearch}
-        toggler={(bool) => {
-          if (!bool) {
-            setSaveAsSelected(false);
-          }
-          setShowSavedSearch(bool);
-        }}
+        toggler={setShowSavedSearch}
         borderRadius="0.625rem"
         width={'45vw'}
       />

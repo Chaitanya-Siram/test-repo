@@ -59,7 +59,7 @@ export default AddKeyword;
 AddKeyword.propTypes = {
   handleSendKeyword: PropTypes.func,
   isDisabled: PropTypes.bool,
-  coachMarkId: PropTypes.string,
+  coachMarkId: PropTypes.string
 };
 
 export const KeywordItem = styled.div`

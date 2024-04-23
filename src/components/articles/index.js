@@ -85,7 +85,7 @@
 // };
 // export default ArticleComponentViewer;
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components/macro';
 import { Link, useLocation } from 'react-router-dom';
@@ -111,7 +111,7 @@ import BookMarkIcon2 from '../../assets/icons/BookMarkIcon2';
 import toast from 'react-hot-toast';
 import { axiosPostRequestAPI, axiosDeleteAPI } from '../../service';
 import { useMutation } from '@tanstack/react-query';
-import ArticleImageNAImg from '../../assets/img/NA for no image.svg';
+import { Img } from '../../assets/img';
 import { VerticleDots } from '../../assets/icons/VerticleDots';
 import SimpleReusableDropDown from '../simple-dropdown';
 import {
@@ -227,13 +227,13 @@ const ArticlewprZ = styled.div`
   gap: 0.5rem;
 `;
 
-// const ArticleImg = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   background-image: ${({ src }) => `url(${src})`};
-//   background-size: cover;
-//   background-position: inherit;
-// `;
+const ArticleImg = styled.div`
+  width: 100%;
+  height: 100%;
+  background-image: ${({ src }) => `url(${src})`};
+  background-size: cover;
+  background-position: inherit;
+`;
 const ArticleTextImgWrp = styled.div`
   display: flex;
   flex-direction: row;
@@ -410,6 +410,9 @@ const ArticleTextWrp = styled.div`
   font-size: 0.75rem;
   align-items: center;
   gap: 0.25rem;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const ArticleTextLabel = styled.div`
   color: ${({ theme }) => theme.closeButton};
@@ -452,11 +455,7 @@ const SyndicationButton = styled.button`
   }
 `;
 
-const KeywordPopoverWrap = styled.div`
-  &:hover {
-    cursor: pointer;
-  }
-`;
+const KeywordPopoverWrap = styled.div``;
 
 const ArticleIconWrp = styled.div`
   position: relative;
@@ -547,12 +546,11 @@ const IconsPop = ({
 
   useEffect(() => {
     setText(textData());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.ele]);
 
-  // const selectedTheme = useSelector((store) => {
-  //   return store?.theme.theme || {};
-  // });
+  const selectedTheme = useSelector((store) => {
+    return store?.theme.theme || {};
+  });
 
   const handleClickOutside = (event) => {
     if (iconPopRef.current && !iconPopRef.current.contains(event.target)) {
@@ -867,10 +865,10 @@ const Articles = ({
     });
   };
 
-  // const handleSydication = (value) => {
-  //   setSydicationActive(true);
-  //   setSydicationArticles(value);
-  // };
+  const handleSydication = (value) => {
+    setSydicationActive(true);
+    setSydicationArticles(value);
+  };
 
   const recentSearchId = state?.savedSearchData?.recent_search_id;
 
@@ -1377,7 +1375,6 @@ Articles.propTypes = {
 };
 
 const RenderImage = ({ url }) => {
-  // eslint-disable-next-line no-unused-vars
   const [_isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
@@ -1388,7 +1385,7 @@ const RenderImage = ({ url }) => {
   };
   return (
     <img
-      src={`${hasError ? ArticleImageNAImg : url}`}
+      src={`${hasError ? Img.ArticleImageNAImg : url}`}
       alt="article thumbnail"
       onLoad={handleImageLoad}
       onError={handleImageError}

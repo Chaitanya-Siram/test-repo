@@ -1,5 +1,5 @@
 import React from 'react';
-import DarkLogo from '../../assets/img/bg/DarkLogo.svg';
+import { Img } from '../../assets/img';
 import { useNavigate, useSearchParams } from 'react-router-dom/dist';
 import {
   OTPAcceptTCWrp,
@@ -35,7 +35,7 @@ const OTPVerification = () => {
         <OTPTotalWrp>
           <OTPLeftContainer>Build Analytics with intelligence</OTPLeftContainer>
           <OTPRightContainer>
-            <OTPAlphaIcon src={DarkLogo} />
+            <OTPAlphaIcon src={Img.DarkLogo} />
             <OTPTitleWrp>OTP Verification</OTPTitleWrp>
             <OTPTitleDescpSec>
               Please input the 6 digit OTP sent to <b>{email}</b>

@@ -1,4 +1,4 @@
-name: Build and Deploy React App to CloudFront
+name: Deployment to Dev
 
 on:
   push:

@@ -409,9 +409,9 @@ const SearchComponent = ({
         guidedSection && guidedSearch?.all === '' && guidedSearch?.any === ''
           ? setErrorPopUp(true)
           : handleSearchValue &&
-            handleSearchValue(
-              guidedSection ? guidedSearch : replaceOperators(value)
-            );
+          handleSearchValue(
+            guidedSection ? guidedSearch : replaceOperators(value)
+          );
       } else {
         if (!guidedSection) {
           if (!value.trim()) {
@@ -452,10 +452,15 @@ const SearchComponent = ({
             );
             return;
           }
-          handleSearchValue(null, {
-            filter: payload,
-            query: guidedSection ? guidedSearch : replaceOperators(value),
-            isGuidedSearch: guidedSection,
+          await postSearchAsync(searchFilters, {
+            onSuccess: (postData) => {
+              handleSearchValue &&
+                handleSearchValue(postData?.data, {
+                  filter: payload,
+                  query: guidedSection ? guidedSearch : replaceOperators(value),
+                  isGuidedSearch: guidedSection,
+                });
+            },
           });
           handleCancelSearch && handleCancelSearch(); // onGuidedToggleFocus(false) onSearchInputFocus(false);
         }

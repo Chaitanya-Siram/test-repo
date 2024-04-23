@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import BackGround from '../../assets/img/bg/background.png';
+import { Img } from '../../assets/img';
 
 export const OTPCreatePasswordWrp = styled.div`
-  background-image: url(${BackGround});
+  background-image: url(${Img.BackGround});
   background-size: 180%; /* You can use 'cover' to make the background cover the entire container */
   background-position: center; /* Center the background image */
   height: 100vh; /* Set the height to 100% of the viewport height */

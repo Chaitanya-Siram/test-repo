@@ -29,8 +29,6 @@ import {
 import { setInput } from '../../redux/slices/searchInputSlice';
 import { dashboardCharts } from '../../pages/new-dashboard/utils';
 import { encloseWordsInDoubleQuotes } from '../../hooks/usePeopleCharts';
-import DashboardPopup from '../dasboard-popup';
-import DownloadArticlePopup from '../download-articles-popup';
 
 const articleTypeDefault = {
   widget: undefined,
@@ -112,9 +110,6 @@ const ArticleGraph = ({
   });
 
   const [resetSelected, setResetSelected] = useState(false);
-  const [checked, setChecked] = useState([]);
-  const [downloadSelected, setDownloadSelected] = useState('');
-  const [downloadArticleFlag, setDownLoadArticleFlag] = useState(false);
 
   // const [loader, setLoader] = useState(false);
   // const [guidedSearch, setGuidedSearch] = useState({
@@ -362,7 +357,8 @@ const ArticleGraph = ({
         searchFilters = {
           ...searchFilters,
           ...graphFilter,
-          syndication_article_title: syndicationType?.rawData?.title,
+          syndication_reprint_group_id:
+            syndicationType?.rawData?.reprint_group_id,
           syndication_article_id: syndicationType?.rawData?.articleId,
         };
       } else {
@@ -670,42 +666,6 @@ const ArticleGraph = ({
             setStoreTags={setStoreTags}
             bookmarksLocal={bookmarksLocal}
             hiddenArticlesLocal={hiddenArticlesLocal}
-            checked={checked}
-            setChecked={setChecked}
-            setDownLoadArticleFlag={setDownLoadArticleFlag}
-            setDownloadSelected={setDownloadSelected}
-          />
-          <DashboardPopup
-            open={downloadArticleFlag}
-            toggler={setDownLoadArticleFlag}
-            popContent={
-              // <ContactUs
-              //   toggler={setNewCanvasPopCont}
-              //   updateParentStateCont={updateParentStateCont}
-              // />
-              <DownloadArticlePopup
-                toggler={setDownLoadArticleFlag}
-                checked={checked}
-                totalArticles={inSearchPaging?.total}
-                downloadType={downloadSelected}
-                getPayloadForSearch={() => {
-                  return getPayloadForSearch(
-                    customData?.query,
-                    customData?.filters,
-                    searchFilterOptions,
-                    customData?.guidedSection,
-                    true
-                  );
-                }}
-                query={customData?.query}
-                articlesInfo={inSearchArticles}
-                sortOrder={inSearchSortOrder}
-              />
-            }
-            padding="0"
-            Cross={true}
-            borderRadius="0.75rem"
-            width={'25rem'}
           />
         </ArticleSectionComponentWrp>
       </SearchResultWrp>

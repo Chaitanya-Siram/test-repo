@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import BackGround from '../../assets/img/bg/background.png';
+import { Img } from '../../assets/img';
 
 export const CreatePasswordWrp = styled.div`
-  background-image: url(${BackGround});
+  background-image: url(${Img.BackGround});
   background-size: 180%; /* You can use 'cover' to make the background cover the entire container */
   background-position: center; /* Center the background image */
   height: 100vh; /* Set the height to 100% of the viewport height */
@@ -52,12 +52,11 @@ export const RightContainer = styled.div`
 `;
 
 export const AlphaIcon = styled.img`
-  width: 4rem;
-  height: 3rem;
+  width: 2.9375rem;
+  height: 2.5rem;
   display: flex;
   align-self: stretch;
   margin-bottom: 1.25rem;
-  margin-left: -0.7rem;
 `;
 
 export const TitleWrp = styled.h1`
@@ -133,7 +132,7 @@ export const InputField = styled.input`
 export const CreateIconWrp = styled.div`
   margin-left: auto;
   margin-right: 1rem;
-  margin-top: 1rem;
+  margin-top: 0.65rem;
   margin-bottom: auto;
   cursor: pointer;
 `;

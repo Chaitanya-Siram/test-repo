@@ -105,16 +105,14 @@ const GridDashboard = ({
   // const location = useLocation();
   const authInfo = getTokenData();
   const [active, setActive] = useState(0);
-  // const [activeSearchId, setActiveSearchId] = useState(0);
+  const [activeSearchId, setActiveSearchId] = useState(0);
   const [savePopup, setSavePopup] = useState(false);
 
   const [dashType, setDashType] = useState('');
-  // const [loader, setLoader] = useState(false);
-  const loader = false;
+  const [loader, setLoader] = useState(false);
   const [articleType, setArticleType] = useState(articleTypeDefault);
   const [type, setType] = useState('totalArticles');
   const [page, setPage] = useState(0);
-  // eslint-disable-next-line no-unused-vars
   const [floatingPagination, setfloatingPagination] = useState(false);
   // const [activeScreen, setActiveScreen] = useState('dashboard');
   const [selectedDashboard, setSelectedDashboard] = useState({});
@@ -123,9 +121,8 @@ const GridDashboard = ({
   const [dateTimeAvailable, setDateTimeAvailable] = useState(false);
   const handleListClick = (item) => {
     setActive(item?.id);
-    // setActiveSearchId(item?.searchId);
+    setActiveSearchId(item?.searchId);
     setDashType(item?.type);
-    console.log({ item });
     setSelectedDashboard(item);
   };
   const [resetSelection, setResetSelection] = useState(true);
@@ -175,8 +172,6 @@ const GridDashboard = ({
       setFilters(searchParams);
     }
   }, [selectedDashboard]);
-
-  console.log({ charts: selectedDashboard?.chart_field?.selectedChart });
 
   function isChartIdMatch(targetChartId) {
     // Check if any item in the selectedChart array has a matching chartId
@@ -838,8 +833,7 @@ const GridDashboard = ({
               volumeAnalysisWidgetDetails={{
                 isLoading: isVolumeAnalysisFetching || isVolumeAnalysisLoading,
                 show:
-                  !selectedDashboard?.params?.competition_keywords?.length >
-                    0 || selectedDashboard?.type === 'custom'
+                  !selectedDashboard?.params?.competition_keywords?.length > 0
                     ? selectedDashboard?.chart_field?.selectedChart?.some(
                         (chart) => chart.chartId === 'volume_analysis'
                       )
@@ -857,8 +851,7 @@ const GridDashboard = ({
               sentimentAnalysisWidgetDetails={{
                 isLoading: isSentimentDataLoading || isSentimentDataFetching,
                 show:
-                  !selectedDashboard?.params?.competition_keywords?.length >
-                    0 || selectedDashboard?.type === 'custom'
+                  !selectedDashboard?.params?.competition_keywords?.length > 0
                     ? selectedDashboard?.chart_field?.selectedChart?.some(
                         (chart) => chart.chartId === 'sentiment_analysis'
                       )
@@ -877,8 +870,7 @@ const GridDashboard = ({
                 isLoading:
                   isSentimentOvertimeLoading || isSentimeentOvertimeFetching,
                 show:
-                  !selectedDashboard?.params?.competition_keywords?.length >
-                    0 || selectedDashboard?.type === 'custom'
+                  !selectedDashboard?.params?.competition_keywords?.length > 0
                     ? selectedDashboard?.chart_field?.selectedChart?.some(
                         (chart) => chart.chartId === 'sentiment_over_time'
                       )
@@ -898,8 +890,7 @@ const GridDashboard = ({
                   isCoverageOvertimeBrandDataFetching ||
                   isCoverageOvertimeBrandDataLoading,
                 show:
-                  !selectedDashboard?.params?.competition_keywords?.length >
-                    0 || selectedDashboard?.type === 'custom'
+                  !selectedDashboard?.params?.competition_keywords?.length > 0
                     ? selectedDashboard?.chart_field?.selectedChart?.some(
                         (chart) => chart.chartId === 'coverage_over_time'
                       )
@@ -919,8 +910,7 @@ const GridDashboard = ({
                   isReachOvertimeBrandDataFetching ||
                   isReachOvertimeBrandDataLoading,
                 show:
-                  !selectedDashboard?.params?.competition_keywords?.length >
-                    0 || selectedDashboard?.type === 'custom'
+                  !selectedDashboard?.params?.competition_keywords?.length > 0
                     ? selectedDashboard?.chart_field?.selectedChart?.some(
                         (chart) => chart.chartId === 'reach_over_time'
                       )
@@ -938,8 +928,7 @@ const GridDashboard = ({
               mediaTypeLWidgetDetails={{
                 isLoading: isMediaFetching || isMediaLoading,
                 show:
-                  !selectedDashboard?.params?.competition_keywords?.length >
-                    0 || selectedDashboard?.type === 'custom'
+                  !selectedDashboard?.params?.competition_keywords?.length > 0
                     ? selectedDashboard?.chart_field?.selectedChart?.some(
                         (chart) => chart.chartId === 'media_type'
                       )
@@ -957,8 +946,7 @@ const GridDashboard = ({
               SOVWidgetDetails={{
                 isLoading: isSOVDataFetching || isSOVDataLoading,
                 show:
-                  selectedDashboard?.params?.competition_keywords?.length > 0 ||
-                  selectedDashboard?.type === 'custom'
+                  selectedDashboard?.params?.competition_keywords?.length > 0
                     ? selectedDashboard?.chart_field?.selectedChart?.some(
                         (chart) => chart.chartId === 'sov'
                       )
@@ -978,8 +966,7 @@ const GridDashboard = ({
                   isCoverageOvertimeBrandCompetitionDFetching ||
                   isCoverageOvertimeBrandCompetitionDLoading,
                 show:
-                  selectedDashboard?.params?.competition_keywords?.length > 0 ||
-                  selectedDashboard?.type === 'custom'
+                  selectedDashboard?.params?.competition_keywords?.length > 0
                     ? selectedDashboard?.chart_field?.selectedChart?.some(
                         (chart) =>
                           chart.chartId === 'competitive_coverage_over_time'
@@ -998,8 +985,7 @@ const GridDashboard = ({
               sentimentCompWidgetDetails={{
                 isLoading: isSentimentCompLoading || isSentimentCompFetching,
                 show:
-                  selectedDashboard?.params?.competition_keywords?.length > 0 ||
-                  selectedDashboard?.type === 'custom'
+                  selectedDashboard?.params?.competition_keywords?.length > 0
                     ? selectedDashboard?.chart_field?.selectedChart?.some(
                         (chart) => chart.chartId === 'article_sentiment'
                       )
@@ -1018,8 +1004,7 @@ const GridDashboard = ({
                 isLoading:
                   isReachOvertimeCompFetching || isReachOvertimeCompLoading,
                 show:
-                  selectedDashboard?.params?.competition_keywords?.length > 0 ||
-                  selectedDashboard?.type === 'custom'
+                  selectedDashboard?.params?.competition_keywords?.length > 0
                     ? selectedDashboard?.chart_field?.selectedChart?.some(
                         (chart) =>
                           chart.chartId === 'competitive_reach_over_time'
@@ -1038,8 +1023,7 @@ const GridDashboard = ({
               mediaBreakdownWidgetDetails={{
                 isLoading: isMediaBreakdownFetching || isMediaBreakdownLoading,
                 show:
-                  selectedDashboard?.params?.competition_keywords?.length > 0 ||
-                  selectedDashboard?.type === 'custom'
+                  selectedDashboard?.params?.competition_keywords?.length > 0
                     ? selectedDashboard?.chart_field?.selectedChart?.some(
                         (chart) => chart.chartId === 'breakdown_by_media_type'
                       )
@@ -1059,8 +1043,7 @@ const GridDashboard = ({
                   isJournalistCoverageDataFetching ||
                   isJournalistCoverageDataLoading,
                 show:
-                  selectedDashboard?.params?.competition_keywords?.length > 0 ||
-                  selectedDashboard?.type === 'custom'
+                  selectedDashboard?.params?.competition_keywords?.length > 0
                     ? selectedDashboard?.chart_field?.selectedChart?.some(
                         (chart) => chart.chartId === 'coverage_by_journalist'
                       )
@@ -1078,8 +1061,7 @@ const GridDashboard = ({
               sourceCompWidgetDetails={{
                 isLoading: isSourceCompDataFetching || isSourceCompDataLoading,
                 show:
-                  selectedDashboard?.params?.competition_keywords?.length > 0 ||
-                  selectedDashboard?.type === 'custom'
+                  selectedDashboard?.params?.competition_keywords?.length > 0
                     ? selectedDashboard?.chart_field?.selectedChart?.some(
                         (chart) => chart.chartId === 'coverage_by_source'
                       )

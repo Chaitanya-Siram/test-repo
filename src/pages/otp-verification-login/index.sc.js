@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import LoginBg2 from '../../assets/img/loginImg/LoginBg2.png';
+import { Img } from '../../assets/img';
 
 export const OTPCreatePasswordWrp = styled.div`
-  background-image: url(${LoginBg2});
+  background-image: url(${Img.LoginBg2});
   background-size: 180%; /* You can use 'cover' to make the background cover the entire container */
   background-position: center; /* Center the background image */
   height: 100vh; /* Set the height to 100% of the viewport height */
@@ -49,12 +49,11 @@ export const OTPRightContainer = styled.form`
 `;
 
 export const OTPAlphaIcon = styled.img`
-  width: 4rem;
-  height: 3rem;
+  width: 2.9375rem;
+  height: 2.5rem;
   display: flex;
   align-self: stretch;
   margin-bottom: 1.25rem;
-  margin-left: -0.7rem;
 `;
 
 export const OTPTitleWrp = styled.h1`

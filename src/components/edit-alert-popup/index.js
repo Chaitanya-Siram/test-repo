@@ -156,8 +156,7 @@ const EditAlertsPopup = ({ toggler, heading = 'Edit Alert', selectedItem }) => {
     },
   });
 
-  // const [title, setTitle] = useState(selectedItem.title);
-  const title = selectedItem.title;
+  const [title, setTitle] = useState(selectedItem.title);
   const [description, setDescription] = useState(selectedItem.description);
   const [volumebox, setVolumebox] = useState();
   const [sentimentbox, setSentimentbox] = useState();
