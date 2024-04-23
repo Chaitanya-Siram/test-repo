@@ -655,7 +655,7 @@ export const getJournalistCoverageData = async (payload, brand, comp) => {
   Object.keys(response?.data).forEach((category, index) => {
     // for (let i = 0; i === dataLenght; i++) {
     if (category === JSON.stringify(brand.toString()).toLowerCase()) {
-      response?.data[category]?.slice(0, 10)?.map((item) => {
+      response?.data[category]?.map((item) => {
         result.no_articles.push({
           key: category,
           author_id: item.author_id,
@@ -666,7 +666,7 @@ export const getJournalistCoverageData = async (payload, brand, comp) => {
         });
       });
     } else if (category === JSON.stringify(keywords[0]).toLowerCase()) {
-      response?.data[category]?.slice(0, 10)?.map((item) => {
+      response?.data[category]?.map((item) => {
         result.total_reach.push({
           key: category,
           author_id: item.author_id,
@@ -677,7 +677,7 @@ export const getJournalistCoverageData = async (payload, brand, comp) => {
         });
       });
     } else if (category === JSON.stringify(keywords[1]).toLowerCase()) {
-      response?.data[category]?.slice(0, 10)?.map((item) => {
+      response?.data[category]?.map((item) => {
         result.total_ave.push({
           key: category,
           author_id: item.author_id,
@@ -688,7 +688,7 @@ export const getJournalistCoverageData = async (payload, brand, comp) => {
         });
       });
     } else if (category === JSON.stringify(keywords[2]).toLowerCase()) {
-      response?.data[category]?.slice(0, 10)?.map((item) => {
+      response?.data[category]?.map((item) => {
         result.prominence.push({
           key: category,
           author_id: item.author_id,
@@ -699,7 +699,7 @@ export const getJournalistCoverageData = async (payload, brand, comp) => {
         });
       });
     } else if (category === JSON.stringify(keywords[3]).toLowerCase()) {
-      response?.data[category]?.slice(0, 10)?.map((item) => {
+      response?.data[category]?.map((item) => {
         result.sentiment.push({
           key: category,
           author_id: item.author_id,
@@ -711,7 +711,7 @@ export const getJournalistCoverageData = async (payload, brand, comp) => {
         });
       });
     } else if (category === JSON.stringify(keywords[4]).toLowerCase()) {
-      response?.data[category]?.slice(0, 10)?.map((item) => {
+      response?.data[category]?.map((item) => {
         result.competition_Five.push({
           key: category,
           author_id: item.author_id,
@@ -920,7 +920,7 @@ export const getSourcesComp = async (payload, brand, comp) => {
   Object.keys(response?.data).forEach((category, index) => {
     // for (let i = 0; i === dataLenght; i++) {
     if (category === JSON.stringify(brand.toString()).toLowerCase()) {
-      response?.data[category]?.slice(0, 10)?.map((item) => {
+      response?.data[category]?.map((item) => {
         result.no_articles.push({
           key: category,
           label: item.source,
@@ -930,7 +930,7 @@ export const getSourcesComp = async (payload, brand, comp) => {
         });
       });
     } else if (category === JSON.stringify(keywords[0]).toLowerCase()) {
-      response?.data[category]?.slice(0, 10)?.map((item) => {
+      response?.data[category]?.map((item) => {
         result.total_reach.push({
           key: category,
           label: item.source,
@@ -940,7 +940,7 @@ export const getSourcesComp = async (payload, brand, comp) => {
         });
       });
     } else if (category === JSON.stringify(keywords[1]).toLowerCase()) {
-      response?.data[category]?.slice(0, 10)?.map((item) => {
+      response?.data[category]?.map((item) => {
         result.total_ave.push({
           key: category,
           label: item.source,
@@ -950,7 +950,7 @@ export const getSourcesComp = async (payload, brand, comp) => {
         });
       });
     } else if (category === JSON.stringify(keywords[2]).toLowerCase()) {
-      response?.data[category]?.slice(0, 10)?.map((item) => {
+      response?.data[category]?.map((item) => {
         result.prominence.push({
           key: category,
           label: item.source,
@@ -960,7 +960,7 @@ export const getSourcesComp = async (payload, brand, comp) => {
         });
       });
     } else if (category === JSON.stringify(keywords[3]).toLowerCase()) {
-      response?.data[category]?.slice(0, 10)?.map((item) => {
+      response?.data[category]?.map((item) => {
         result.sentiment.push({
           key: category,
           label: item.source,
@@ -971,7 +971,7 @@ export const getSourcesComp = async (payload, brand, comp) => {
         });
       });
     } else if (category === JSON.stringify(keywords[4]).toLowerCase()) {
-      response?.data[category]?.slice(0, 10)?.map((item) => {
+      response?.data[category]?.map((item) => {
         result.competition_Five.push({
           key: category,
           label: item.source,

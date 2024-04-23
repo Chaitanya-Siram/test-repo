@@ -31,9 +31,8 @@ import {
   standardDashboards,
   people,
 } from '../../../constants/widgets';
-// import LogoWithText from '../../../assets/img/bg/logoWithText.svg';
-import AMXlogo from '../../../assets/img/app/Alphametricx-logo-mark-dark.png';
-// import { Img } from '../../../assets/img';
+import LogoWithText from '../../../assets/img/bg/logoWithText.svg';
+import { Img } from '../../../assets/img';
 import JournalistAndSourceGraph from '../../advanced-dashboard/author-impact';
 
 const noLegends = ['top_source', 'top_author', 'volume_analysis'];
@@ -181,7 +180,7 @@ const DashboardInnerContainer = ({
     Array.from(elementsToSetOpacity).forEach((element) => {
       element.style.opacity = '0';
     });
-    const logoUrl = AMXlogo; // Update with the correct path to your logo
+    const logoUrl = LogoWithText; // Update with the correct path to your logo
 
     try {
       let dataUrl;
@@ -206,7 +205,7 @@ const DashboardInnerContainer = ({
       });
 
       // Reset the background color of the container
-      containerElement.style.backgroundColor = 'white';
+      containerElement.style.backgroundColor = 'transparent';
 
       if (option.type === 'Image') {
         const imageDataUrlWithLogo = await combineImagesWithLogo(
@@ -484,6 +483,7 @@ const DashboardInnerContainer = ({
       );
     } else {
       if (
+        dashboardType === 'brand' &&
         widget?.component === 'coverage_by_journalist' &&
         widget?.title === 'Coverage by Journalist'
       ) {
@@ -491,19 +491,14 @@ const DashboardInnerContainer = ({
           <JournalistAndSourceGraph
             widget={widgetData}
             loader={isLoading}
-            dashboardType={dashboardType}
             handleOnClick={(event, d) =>
               handleOnClick(event, d, widget, idx, data?.customClassName)
             }
-            downloadFunction={onDownload}
-            setSelectedComponent={setSelectedComponent}
-            graphDownloading={graphDownloading}
-            editChart={savedChartConfig}
-            widgetClassName={data?.customClassName}
           />
         );
       }
       if (
+        dashboardType === 'brand' &&
         widget?.component === 'coverage_by_source' &&
         widget?.title === 'Coverage by Sources'
       ) {
@@ -511,15 +506,9 @@ const DashboardInnerContainer = ({
           <JournalistAndSourceGraph
             widget={widgetData}
             loader={isLoading}
-            dashboardType={dashboardType}
             handleOnClick={(event, d) =>
               handleOnClick(event, d, widget, idx, data?.customClassName)
             }
-            downloadFunction={onDownload}
-            setSelectedComponent={setSelectedComponent}
-            graphDownloading={graphDownloading}
-            editChart={savedChartConfig}
-            widgetClassName={data?.customClassName}
           />
         );
       }

@@ -1,6 +1,5 @@
 import { toJpeg, toPng } from 'html-to-image';
-// import LogoWithText from '../../assets/img/bg/logoWithText.svg';
-import AMXlogo from '../../assets/img/app/Alphametricx-logo-mark-dark.png';
+import LogoWithText from '../../assets/img/bg/logoWithText.svg';
 import { combineImagesWithLogo, dataURLtoBlob } from '../../constants/utils';
 import JsPDF from 'jspdf';
 
@@ -19,7 +18,7 @@ export const useDownloadGraphsHook = () => {
 
     try {
       const images = [];
-      const logoUrl = AMXlogo; // Update with the correct path to your logo
+      const logoUrl = LogoWithText; // Update with the correct path to your logo
 
       for (const className of classNames) {
         const elements = document.getElementsByClassName(className);
@@ -72,7 +71,7 @@ export const useDownloadGraphsHook = () => {
         });
 
         // Reset the background color of the container
-        containerElement.style.backgroundColor = 'white';
+        containerElement.style.backgroundColor = 'transparent';
 
         images.push({ dataUrl, containerElement });
       }

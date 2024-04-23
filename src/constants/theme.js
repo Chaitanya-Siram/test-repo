@@ -2,8 +2,6 @@ import backgroundImageLight from '../assets/img/bg/BG_AMX-min.png';
 import backgroundImageDark from '../assets/img/homePageBG1.png';
 import AMXDark from '../assets/img/app/logoDark.svg';
 import AMXBg from '../assets/img/bg/bg_sr.svg';
-// import NewAMXLogo from '../assets/img/app/Alphametricx-logo-mark-dark.png';
-import NewAMXLogo from '../assets/img/app/Alphametricx-logo.png';
 
 export const theme = {
   light: {
@@ -14,7 +12,7 @@ export const theme = {
     darkText: '#161A34',
     secondaryBackground: '#F6F7FB',
     backgroundImage: backgroundImageLight,
-    logo: NewAMXLogo || AMXDark,
+    logo: AMXDark,
     logoText: '#ffffff',
     settingsButtonBackground: '#ffffff',
     backgroundColor: AMXBg,
@@ -52,7 +50,6 @@ export const theme = {
     customPeopleLabelColor: '#049F81',
     newsletterContentBackGround: ' #f4f5f8',
     greyColor: '#d1d5dc',
-    inActiverticalDots: '#5C5E60',
   },
   dark: {
     primary: '#2E68FF',
@@ -61,7 +58,7 @@ export const theme = {
     secondaryText: '#000000',
     secondaryBackground: '#FFFFFF',
     backgroundImage: backgroundImageDark,
-    logo: NewAMXLogo || AMXDark,
+    logo: AMXDark,
     logoText: '#ffffff',
   },
   fontFamily: 'Inter',

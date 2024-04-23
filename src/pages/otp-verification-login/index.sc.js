@@ -49,12 +49,11 @@ export const OTPRightContainer = styled.form`
 `;
 
 export const OTPAlphaIcon = styled.img`
-  width: 4rem;
-  height: 3rem;
+  width: 2.9375rem;
+  height: 2.5rem;
   display: flex;
   align-self: stretch;
   margin-bottom: 1.25rem;
-  margin-left: -0.7rem;
 `;
 
 export const OTPTitleWrp = styled.h1`

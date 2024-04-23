@@ -34,8 +34,7 @@ import {
   // CarouselScrollWrpr,
 } from './index.sc';
 import LoginBg2 from '../../assets/img/loginImg/LoginBg2.png';
-// import DarkLogo from '../../assets/img/bg/DarkLogo.svg';
-import NewAMXLogo from '../../assets/img/app/Alphametricx-logo-mark-dark.png';
+import DarkLogo from '../../assets/img/bg/DarkLogo.svg';
 import { ValidateEmail } from './validateEmail';
 import { Button } from '../../components/button';
 import AppFooter from '../../components/app-footer';
@@ -191,7 +190,7 @@ const LoginPage = () => {
         <LoginFormCtrn>
           <LoginFormwpr>
             {/* <LogoBox> */}
-            <LogoImgwpr src={NewAMXLogo} />
+            <LogoImgwpr src={DarkLogo} />
             {/* <LogoTextwpr>AlphametricX</LogoTextwpr> */}
             {/* </LogoBox> */}
             <div

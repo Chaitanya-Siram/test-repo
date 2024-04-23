@@ -28,8 +28,8 @@ export const AppLogo = styled(Link)`
 `;
 
 export const AppLogoSpan = styled.span`
-  height: 2.3rem;
-  width: 13rem;
+  height: 1.3rem;
+  width: 2.5rem;
   background-size: cover;
   background-image: url(${({ theme }) => theme.logo});
 `;
@@ -48,7 +48,7 @@ export const NavUserProfileTitle = styled.div`
   padding: 0rem 0.75rem;
   font-size: 0.75rem;
   color: #fff;
-  &:hover {
+    &:hover {
     cursor: pointer;
   }
 `;

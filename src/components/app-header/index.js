@@ -556,7 +556,7 @@ const AppHeader = () => {
       <AppHeaderWrp>
         <AppHeaderLeft>
           <AppLogo to="/">
-            <AppLogoSpan />
+            <AppLogoSpan /> AlphaMetricX
           </AppLogo>
         </AppHeaderLeft>
         <AppHeaderRight>

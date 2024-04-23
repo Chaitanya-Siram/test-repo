@@ -1,10 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Proptypes from 'prop-types';
 import {
   ChartName,
   FullSlot,
-  IconBox,
-  Iconwpr,
   // IconBox,
   // Iconwpr,
   SlotBody,
@@ -29,11 +27,6 @@ import {
   SlotOverviewWrapper,
 } from '../../search-result/index.sc';
 import SlotOverview from '../../search-result/slot-details/SlotOverview';
-import DownloadIcon from '../../../assets/icons/DownloadIcon';
-import SimpleReusableDropDown from '../../simple-dropdown';
-import { VerticleDots } from '../../../assets/icons/VerticleDots';
-import { useSelector } from 'react-redux';
-import { theme } from '../../../constants/theme';
 
 const gridXTicksCount = 6;
 
@@ -93,21 +86,12 @@ const AuthorImpact = ({
   resetSelection = false,
   handleOnClick = () => {},
   customClassName = 'authorimpact',
-  downloadFunction,
-  setSelectedComponent,
-  graphDownloading,
-  editChart,
-  widgetClassName,
 }) => {
   const [enableTooltip, setEnableTooltip] = useState(false);
   const [toolTipPos, setToolTipPos] = useState({ left: 0, top: 0 });
   const [tooltipData, setTooltipData] = useState();
-  const [openActionDropdown, setOpenActionDropDown] = useState(false);
-  const containerRef = useRef(null);
-  const downloadRef = useRef(null);
 
   const tooltipEnabled = false;
-  const graphData = widget;
 
   const handleMouseEnter = (event, d, i) => {
     if (tooltipEnabled) {
@@ -142,37 +126,6 @@ const AuthorImpact = ({
     }
   };
 
-  const handleOptionIcon = (e, componentName) => {
-    e.stopPropagation();
-    setSelectedComponent(componentName);
-    setOpenActionDropDown(!openActionDropdown);
-  };
-
-  const actionDropDownOptions = [
-    {
-      label: 'Download as Image',
-      icon: <DownloadIcon color="#161A34" />,
-      type: 'Image',
-      clickFunction: (option) => {
-        downloadFunction(option, containerRef, graphData, editChart?.chartName);
-        setOpenActionDropDown(false);
-      },
-    }, // Replace <Icon1 /> with your actual icon component
-    {
-      label: 'Download as Pdf',
-      icon: <DownloadIcon color="#161A34" />,
-      type: 'PDF',
-      clickFunction: (option) => {
-        downloadFunction(option, containerRef, graphData, editChart?.chartName);
-        setOpenActionDropDown(false);
-      },
-    },
-  ];
-
-  const selectedTheme = useSelector((store) => {
-    return store?.theme.theme || {};
-  });
-
   const defaultConfig = {
     handleMouseEnter,
     handleMouseMove,
@@ -182,14 +135,9 @@ const AuthorImpact = ({
   return (
     <>
       <FullSlot
-        className={
-          dashboardType === 'brand' || dashboardType === 'custom'
-            ? widgetClassName
-            : 'graph-widget'
-        }
+        className="graph-widget"
         // selected={idx === selected}
         // onClick={(e) => handleClick(idx, e)}
-        ref={containerRef}
       >
         <SlotDetailsMainWrp className={customClassName}>
           {/* <IconBox>
@@ -213,35 +161,6 @@ const AuthorImpact = ({
               <SlotHeaderLeft>
                 <SlotTitle>{widget?.title || 'Author Impact'}</SlotTitle>
               </SlotHeaderLeft>
-              {(dashboardType === 'brand' || dashboardType === 'custom') && (
-                <IconBox>
-                  <>
-                    <Iconwpr
-                      width={'1.5rem'}
-                      height={'1.5rem'}
-                      onClick={(e) => {
-                        handleOptionIcon(e, graphData.component);
-                      }}
-                      ref={downloadRef}
-                      className="hide-downloading"
-                    >
-                      <VerticleDots
-                        color={
-                          openActionDropdown
-                            ? theme[selectedTheme].primary
-                            : theme[selectedTheme].inActiverticalDots
-                        }
-                      />
-                      <SimpleReusableDropDown
-                        isOpen={openActionDropdown}
-                        options={actionDropDownOptions}
-                        graphDownloading={graphDownloading}
-                        setIsOpen={setOpenActionDropDown}
-                      />
-                    </Iconwpr>
-                  </>
-                </IconBox>
-              )}
             </SlotHeader>
             {type === 'dashboard' && (
               <SlotOverviewWrapper>
@@ -315,9 +234,4 @@ AuthorImpact.propTypes = {
   handleOnClick: Proptypes.func,
   handleUpdatedChart: Proptypes.func,
   customClassName: Proptypes.string,
-  downloadFunction: Proptypes.func,
-  setSelectedComponent: Proptypes.func,
-  graphDownloading: Proptypes.bool,
-  editChart: Proptypes.object,
-  widgetClassName: Proptypes.string,
 };

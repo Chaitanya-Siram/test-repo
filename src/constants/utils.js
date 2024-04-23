@@ -678,7 +678,13 @@ export const combineImagesWithLogo = async (
   ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
   // Draw the logo in the top-left corner with padding
-  ctx.drawImage(logoImage, padding, padding, logoImage.width, logoImage.height);
+  ctx.drawImage(
+    logoImage,
+    padding,
+    padding,
+    logoImage.width * 3,
+    logoImage.height * 3
+  );
 
   // Draw the combined image below and to the right of the logo
   ctx.drawImage(

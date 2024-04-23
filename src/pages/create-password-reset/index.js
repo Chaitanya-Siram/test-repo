@@ -16,8 +16,7 @@ import {
   ValidationWrp,
   ValidationsListWrp,
 } from './index.sc';
-// import DarkLogo from '../../assets/img/bg/DarkLogo.svg';
-import NewAMXLogo from '../../assets/img/app/Alphametricx-logo-mark-dark.png';
+import DarkLogo from '../../assets/img/bg/DarkLogo.svg';
 import Cancel from '../../assets/img/cancel.png';
 import Check from '../../assets/img/check.png';
 import { TitleWrp } from '../../components/edit-graph-popup/index.sc';
@@ -169,7 +168,7 @@ const CreatePasswordReset = () => {
         <TotalWrp>
           <LeftContainer>Build Analytics with intelligence</LeftContainer>
           <RightContainer>
-            <AlphaIcon src={NewAMXLogo} />
+            <AlphaIcon src={DarkLogo} />
             <TitleWrp>Create Password</TitleWrp>
             <TitleDescpSec>
               <b>
