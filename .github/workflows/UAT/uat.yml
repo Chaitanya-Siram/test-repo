@@ -5,6 +5,13 @@ on:
     branches:
       - UAT
 
+on:
+  workflow_dispatch:
+    inputs:
+      workflow-file-path:
+        description: 'UAT/uat.yml'
+        required: true
+
 concurrency:
   group: Build and Deploy
 
@@ -19,11 +26,7 @@ jobs:
       S3_BUCKET: ${{ secrets.S3_BUCKET_UAT }}
       CDN_DISTRIBUTION_ID: ${{ secrets.CDN_DISTRIBUTION_ID_UAT }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
-      REACT_APP_API: ${{ secrets.REACT_APP_API_UAT }}
-      REACT_APP_BACKEND_DUMMY: ${{ secrets.REACT_APP_BACKEND_DUMMY }}
-      REACT_APP_TITLE: ${{ secrets.REACT_APP_TITLE_UAT }}
-      REACT_APP_CSV_FILE: ${{ secrets.REACT_APP_CSV_FILE_UAT }}
-      REACT_APP_WEBSOCKET_API: ${{ secrets.REACT_APP_WEBSOCKET_API_UAT }}
+
 
     steps:
       - name: Checkout the code
