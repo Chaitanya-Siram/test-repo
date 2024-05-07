@@ -1,11 +1,9 @@
 name: Deployment to UAT
 
 on:
-  workflow_dispatch:
-    inputs:
-      workflow-file-path:
-        description: 'UAT/uat.yml'
-        required: true
+  push:
+    branches:
+      - UAT
 
 concurrency:
   group: Build and Deploy
