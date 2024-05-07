@@ -1,11 +1,6 @@
 name: Deployment to UAT
 
 on:
-  push:
-    branches:
-      - UAT
-
-on:
   workflow_dispatch:
     inputs:
       workflow-file-path:
