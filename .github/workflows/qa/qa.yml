@@ -5,7 +5,7 @@ on:
     branches:
       - QA
     paths:
-      - '.github/workflows/qa/**'
+      - .github/workflows/qa/**
 
 concurrency:
   group: Build and Deploy
