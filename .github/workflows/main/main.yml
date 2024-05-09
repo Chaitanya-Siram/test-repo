@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '.github/workflows/main/**'  
 
 concurrency:
   group: Build and Deploy

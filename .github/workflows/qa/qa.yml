@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - QA
+    paths:
+      - '.github/workflows/qa/**'
 
 concurrency:
   group: Build and Deploy
