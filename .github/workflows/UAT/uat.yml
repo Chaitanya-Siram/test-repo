@@ -24,6 +24,7 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
+        uses: ./.github/workflows/UAT/uat
         with:
           fetch-depth: 0
 
