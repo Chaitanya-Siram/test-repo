@@ -79,4 +79,10 @@ jobs:
           curl -H 'Content-Type: application/json' -d '{
             "title": "GitHub Actions Workflow Failed",
             "text": "The GitHub Actions workflow has failed. Please check the details."
-          }' ${{ secrets.TEAMS_WEBHOOK_URL }}        
+          }' ${{ secrets.TEAMS_WEBHOOK_URL }}
+       
+          custom-actions: |
+              - text: View PR
+                url: "https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
+              - text: View CI
+                url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
