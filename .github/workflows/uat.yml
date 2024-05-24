@@ -12,6 +12,7 @@ jobs:
   build-and-deploy:
     name: Build and Deploy  
     runs-on: ubuntu-latest
+    timeout-minutes: 1  # Maximum runtime for the build job
     
     env:
       NODE_VERSION: ${{ secrets.NODE_VERSION }}
@@ -69,19 +70,92 @@ jobs:
           aws cloudfront create-invalidation --distribution-id ${{ env.CDN_DISTRIBUTION_ID }} --paths "/*"
 
   notify:
-    if: failure()
     runs-on: ubuntu-latest
     needs: build-and-deploy
+    if: always()  # Ensure this job runs regardless of the build job result
     steps:
-      - name: Send notification to Microsoft Teams
+      - name: Determine failure reason
+        id: failure-reason
         run: |
-          curl -H 'Content-Type: application/json' -d '{
-            "title": "GitHub Actions Workflow Failed",
-            "text": "The GitHub Actions workflow has failed. Please check the details."
-          }' ${{ secrets.TEAMS_WEBHOOK_URL }}
-       
-          custom-actions: |
-              - text: View PR
-                url: "https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
-              - text: View CI
-                url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          if [ "${{ needs.build-and-deploy.result }}" == "failure" ] && [ $((${{ github.run_duration_ms }} / 60000)) -ge 1 ]; then
+            echo "::set-output name=message::timeout"
+          elif [ "${{ needs.build-and-deploy.result }}" == "failure" ]; then
+            echo "::set-output name=message::failure"
+          else
+            echo "::set-output name=message::success"
+          fi
+
+      - name: Send notification to Microsoft Teams
+        if: ${{ steps.failure-reason.outputs.message != 'success' }}
+        run: |
+          if [ "${{ steps.failure-reason.outputs.message }}" == "timeout" ]; then
+            curl -H 'Content-Type: application/json' -d '{
+              "title": "GitHub Actions Workflow Timeout",
+              "text": "The GitHub Actions workflow has timed out after exceeding the 1-minute limit.",
+              "sections": [{
+                "activityTitle": "Job Details",
+                "facts": [
+                  {
+                    "name": "Repository",
+                    "value": "${{ github.repository }}"
+                  },
+                  {
+                    "name": "Workflow",
+                    "value": "${{ github.workflow }}"
+                  },
+                  {
+                    "name": "Job",
+                    "value": "${{ github.job }}"
+                  },
+                  {
+                    "name": "Commit",
+                    "value": "${{ github.sha }}"
+                  },
+                  {
+                    "name": "Branch",
+                    "value": "${{ github.ref }}"
+                  },
+                  {
+                    "name": "Actor",
+                    "value": "${{ github.actor }}"
+                  }
+                ],
+                "markdown": true
+              }]
+            }' ${{ secrets.TEAMS_WEBHOOK_URL }}
+          elif [ "${{ steps.failure-reason.outputs.message }}" == "failure" ]; then
+            curl -H 'Content-Type: application/json' -d '{
+              "title": "GitHub Actions Workflow Failed",
+              "text": "The GitHub Actions workflow has failed. Please check the details.",
+              "sections": [{
+                "activityTitle": "Job Details",
+                "facts": [
+                  {
+                    "name": "Repository",
+                    "value": "${{ github.repository }}"
+                  },
+                  {
+                    "name": "Workflow",
+                    "value": "${{ github.workflow }}"
+                  },
+                  {
+                    "name": "Job",
+                    "value": "${{ github.job }}"
+                  },
+                  {
+                    "name": "Commit",
+                    "value": "${{ github.sha }}"
+                  },
+                  {
+                    "name": "Branch",
+                    "value": "${{ github.ref }}"
+                  },
+                  {
+                    "name": "Actor",
+                    "value": "${{ github.actor }}"
+                  }
+                ],
+                "markdown": true
+              }]
+            }' ${{ secrets.TEAMS_WEBHOOK_URL }}
+          fi
