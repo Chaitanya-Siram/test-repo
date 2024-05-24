@@ -12,7 +12,6 @@ jobs:
   build:
     name: Build and Deploy  
     runs-on: ubuntu-latest
-    timeout-minutes: 1  # Maximum runtime for the build job
     
     env:
       NODE_VERSION: ${{ secrets.NODE_VERSION }}
