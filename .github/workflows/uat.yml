@@ -85,6 +85,8 @@ jobs:
             webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
             card-layout-exit: compact
             environment: dev
+            show-on-exit: false
+            show-on-failure: true
             custom-facts: |
               - name: Changed Files
                 value: ${{ github.event.pull_request.changed_files }}
