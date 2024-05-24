@@ -12,7 +12,7 @@ jobs:
   build:
     name: Build and Deploy  
     runs-on: ubuntu-latest
-    timeout-minutes: 1  # Maximum runtime for the build job
+    timeout-minutes: 15  # Maximum runtime for the build job
     
     env:
       NODE_VERSION: ${{ secrets.NODE_VERSION }}
@@ -70,7 +70,7 @@ jobs:
           aws cloudfront create-invalidation --distribution-id ${{ env.CDN_DISTRIBUTION_ID }} --paths "/*"
 
           echo "Running script..."
-          sleep 65  # Simulating a long-running process that exceeds 1 minute
+          sleep 65  # Simulating a long-running process that exceeds 15 minute
 
   notify:
     runs-on: ubuntu-latest
@@ -84,7 +84,7 @@ jobs:
           RUN_DURATION_MS="${{ github.run_duration_ms }}"
           RUN_DURATION_MIN=$((RUN_DURATION_MS / 60000))
 
-          if [ "$BUILD_RESULT" == "failure" ] && [ $RUN_DURATION_MIN -ge 1 ]; then
+          if [ "$BUILD_RESULT" == "failure" ] && [ $RUN_DURATION_MIN -ge 15 ]; then
             echo "::set-output name=message::timeout"
           elif [ "$BUILD_RESULT" == "failure" ]; then
             echo "::set-output name=message::failure"
