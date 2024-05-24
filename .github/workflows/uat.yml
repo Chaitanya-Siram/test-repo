@@ -72,6 +72,7 @@ jobs:
           sleep 65  # Simulating a long-running process that exceeds 1 minute
 
   notify:
+      if: failure() || success()
       needs: build
       runs-on: ubuntu-latest
       steps:
