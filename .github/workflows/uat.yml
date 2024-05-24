@@ -73,7 +73,7 @@ jobs:
           sleep 65  # Simulating a long-running process that exceeds 1 minute
 
   notify:
-      needs: deploy
+      needs: build
       runs-on: ubuntu-latest
       steps:
         - name: Checkout code
