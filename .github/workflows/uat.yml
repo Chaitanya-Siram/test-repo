@@ -86,6 +86,7 @@ jobs:
             webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
             card-layout-exit: cozy
             environment: dev
+            enable-view-status: true
             show-on-exit: false
             show-on-failure: true
             custom-facts: |
