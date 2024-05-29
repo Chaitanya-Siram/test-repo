@@ -84,7 +84,7 @@ jobs:
           with:
             github-token: ${{ github.token }}
             webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
-            card-layout-exit: cozy
+            card-layout-exit: complete
             environment: dev
             enable-view-status: false
             show-on-exit: false
