@@ -87,4 +87,4 @@ jobs:
           card-layout-exit: compact
           enable-view-status: true
           environment: uat
-          message: "Deployment status: ${{ needs.build.result }}" 
+          status: "Deployment status: ${{ needs.build.result }}" 
