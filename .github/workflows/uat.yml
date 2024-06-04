@@ -83,5 +83,6 @@ jobs:
           uses: thechetantalwar/teams-notify@v2
           with:
             teams_webhook_url: ${{ secrets.TEAM_HOOK }}
-            message: "Github Action Build Number ${{ github.run_number }}\n Env: Dev\n PR: https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}\n Result: ${{ needs.build.result }}"
+            environment: UAT
+            message: "Github Action Build Number ${{ github.run_number }} of PR: https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }} Deployment status: ${{ needs.build.result }}"
             
