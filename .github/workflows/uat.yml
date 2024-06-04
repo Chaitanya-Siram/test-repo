@@ -72,13 +72,30 @@ jobs:
           sleep 65  # Simulating a long-running process that exceeds 1 minute
 
   notify:
-        runs-on: ubuntu-latest
-        if: always()
-        needs: build
-    steps:
-      - name: Send a Notification
-        id: notify
-        uses: thechetantalwar/teams-notify@v2
-        with:
-        webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
-        message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.build.result }}."
+      if: failure() || success()
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        - name: Send notification to Microsoft Teams
+          uses: thechetantalwar/teams-notify@v2
+          with:
+            github-token: ${{ github.token }}
+            webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
+            card-layout-exit: complete
+            environment: dev
+            enable-view-status: false
+            show-on-exit: false
+            show-on-failure: true
+            custom-facts: |
+              - name: Changed Files
+                value: ${{ github.event.pull_request.changed_files }}
+              - name: Pull Request
+                value: "https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
+            custom-actions: |
+              - text: View PR
+                url: "https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
+              - text: View CI
+                url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
