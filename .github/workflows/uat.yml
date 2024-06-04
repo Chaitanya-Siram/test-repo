@@ -72,17 +72,19 @@ jobs:
           sleep 65  # Simulating a long-running process that exceeds 1 minute
 
   notify:
-      if: failure() || success()
-      needs: build
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
+    if: failure() || success()
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-        - name: Send notification to Microsoft Teams
-          uses: thechetantalwar/teams-notify@v2
-          with:
-            teams_webhook_url: ${{ secrets.TEAM_HOOK }}
-            environment: UAT
-            message: "Github Action Build Number ${{ github.run_number }} of PR: https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }} Deployment status: ${{ needs.build.result }}"
-            
+      - name: Send notification to Microsoft Teams
+        uses: dchourasia/ms-teams-notification@1.1
+        with:
+          github-token: ${{ github.token }}
+          webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          card-layout-exit: compact
+          enable-view-status: true
+          environment: uat
+          message: "Deployment status: ${{ needs.build.result }}" 
