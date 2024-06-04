@@ -71,7 +71,7 @@ jobs:
           echo "Running script..."
           sleep 65  # Simulating a long-running process that exceeds 1 minute
 
-notify:
+  notify:
         runs-on: ubuntu-latest
         if: always()
         needs: build
