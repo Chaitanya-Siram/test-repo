@@ -83,7 +83,7 @@ jobs:
           uses: thechetantalwar/teams-notify@v2
           with:
             teams_webhook_url: ${{ secrets.TEAM_HOOK }}
-            message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.build.result }}."
+            message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.build.result }}.
                   https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }} 
-                  Github Action Build Number ${{ github.run_number }}
+                  Github Action Build Number ${{ github.run_number }}"
             
