@@ -72,11 +72,11 @@ jobs:
           sleep 65  # Simulating a long-running process that exceeds 1 minute
 
   notify:
-    runs-on: ubuntu-latest
-    if: always()
-    needs: build
+        runs-on: ubuntu-latest
+        if: always()
+        needs: build
     steps:
-    - name: Send a Notification
+      - name: Send a Notification
         id: notify
         uses: thechetantalwar/teams-notify@v2
         with:
