@@ -77,7 +77,6 @@ jobs:
     needs: build
     steps:
     - name: Send a Notification
-        id: notify
         uses: thechetantalwar/teams-notify@v2
         with:
         teams_webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
