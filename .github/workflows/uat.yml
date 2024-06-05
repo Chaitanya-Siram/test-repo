@@ -12,6 +12,7 @@ jobs:
   build:
     name: Build and Deploy  
     runs-on: ubuntu-latest
+    timeout-minutes: 1  # Set job timeout to 1 minute
     
     env:
       NODE_VERSION: ${{ secrets.NODE_VERSION }}
