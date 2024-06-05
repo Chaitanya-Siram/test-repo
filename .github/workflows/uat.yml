@@ -69,8 +69,7 @@ jobs:
           aws configure set preview.cloudfront true
           aws cloudfront create-invalidation --distribution-id ${{ env.CDN_DISTRIBUTION_ID }} --paths "/*"
 
-          echo "Running script..."
-          sleep 65  # Simulating a long-running process that exceeds 1 minute
+        
 
   notify:
       if: failure() || success()
