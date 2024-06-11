@@ -24,6 +24,10 @@ jobs:
       REACT_APP_TITLE: ${{ secrets.REACT_APP_TITLE }}
       REACT_APP_CSV_FILE: ${{ secrets.REACT_APP_CSV_FILE }}
       REACT_APP_WEBSOCKET_API: ${{ secrets.REACT_APP_WEBSOCKET_API }}
+      REACT_APP_SENTRY_DNS: ${{secrets.REACT_APP_SENTRY_DNS}}
+      REACT_APP_ENVIRONMENT: ${{secrets.REACT_APP_ENVIRONMENT}}
+      SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
+      REACT_APP_PR_WEBSOCKET: ${{secrets.REACT_APP_PR_WEBSOCKET}}
 
     steps:
       - name: Checkout the code
